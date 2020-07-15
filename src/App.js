@@ -1,10 +1,8 @@
-import React from "react";
-import logo from "./trivia.png";
-import "./App.css";
-import { emailHash } from "./services/genEmailHash";
+import React from 'react';
+import logo from './trivia.png';
+import './App.css';
 
 export default function App() {
-  console.log(emailHash("danieldelacerdamiranda@gmail.com"));
   return (
     <div className="App">
       <header className="App-header">
