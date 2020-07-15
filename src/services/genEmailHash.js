@@ -1,4 +1,6 @@
 import CryptoJs from 'crypto-js';
 
-export const emailHash = (email) =>
+const emailHash = (email) =>
   CryptoJs.MD5(email.trim().toLowerCase()).toString();
+
+export default emailHash;
