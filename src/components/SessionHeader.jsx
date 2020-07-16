@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import emailHash from '../services/genEmailHash';
 import './SessionHeader.css';
 
@@ -27,5 +28,9 @@ const SessionHeader = ({ score }) => (
 const mapStateToProps = (state) => ({
   score: state.reducer.player.score,
 });
+
+SessionHeader.propTypes = {
+  score: PropTypes.string.isRequired,
+};
 
 export default connect(mapStateToProps)(SessionHeader);
