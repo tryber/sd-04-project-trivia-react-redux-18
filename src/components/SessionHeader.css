@@ -8,8 +8,8 @@
 }
 
 .gravatar-icon {
-  border-radius: 50%;
   border: 3px solid white;
+  border-radius: 50%;
   height: 50px;
   width: 50px;
 }
@@ -19,8 +19,7 @@
   display: flex;
 }
 
-.player-info h3 {
+.header-player-name {
   font-size: 1.5rem;
   margin-left: 20px;
-  margin: 0;
 }

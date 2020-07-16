@@ -15,7 +15,9 @@ const SessionHeader = () => (
         data-testid="header-profile-picture"
         className="gravatar-icon"
       />
-      <h3 data-testid="header-player-name">{getUserInfo().name}</h3>
+      <h3 data-testid="header-player-name" className="header-player-name">
+        {getUserInfo().name}
+      </h3>
     </div>
     <h3 data-testid="header-score">{`Score: ${getUserInfo().score}`}</h3>
   </header>
