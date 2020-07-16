@@ -35,6 +35,8 @@ const mapStateToProps = (state) => ({
 
 SessionHeader.propTypes = {
   score: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  email: PropTypes.string.isRequired,
 };
 
 export default connect(mapStateToProps)(SessionHeader);
