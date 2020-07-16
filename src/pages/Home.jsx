@@ -29,6 +29,15 @@ class Home extends Component {
   handlePlay() {
     getToken().then((json) => {
       localStorage.setItem('token', json.token);
+      localStorage.setItem(
+        'state',
+        JSON.stringify({
+          player: {
+            name: this.state.username,
+            gravatarEmail: this.state.email,
+          },
+        }),
+      );
       this.setState({ redirectPlay: true });
     });
   }
