@@ -9,6 +9,7 @@ class Home extends Component {
     this.state = {
       email: '',
       username: '',
+      token: '',
       redirectPlay: false,
       redirectConfig: false,
     };
