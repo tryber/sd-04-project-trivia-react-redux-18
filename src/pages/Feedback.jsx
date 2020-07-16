@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-
-function Feedback() {
-  return(
-    <p>Feedback</p>
-  )
+class Feedback extends Component {
+  render() {
+    return (
+      <div>
+        <h1>Feedback</h1>
+      </div>
+    );
+  }
 }
 
 export default Feedback;
