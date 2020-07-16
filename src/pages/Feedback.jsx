@@ -5,6 +5,17 @@ class Feedback extends Component {
     return (score >= 3) ? 'Mandou bem!' : 'Podia ser melhor...';
   }
 
+  feedbackResults(score, assertions) {
+    return (
+      <div>
+        <h3>Assertions Questions</h3>
+        <p data-testid="feedback-total-question">{assertions}</p>
+        <h3>Your Score</h3>
+        <p data-testid="feedback-total-question">{score}</p>
+      </div>
+    )
+  }
+
   render() {
     return (
       <div>
