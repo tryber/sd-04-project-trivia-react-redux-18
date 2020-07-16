@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-const feedbackMessage = (score) => {
-  return (score >= 3) ? 'Mandou bem!' : 'Podia ser melhor...'
-};
+const feedbackMessage = (score) => (
+  (score >= 3) ? 'Mandou bem!' : 'Podia ser melhor...'
+);
 const feedbackResults = (score, assertions) => (
-    <div>
-      <h3>Assertions</h3>
-      <p data-testid="feedback-total-question">
-        You got {assertions} assertions!
-      </p>
-      <h3>Your Score</h3>
-      <p data-testid="feedback-total-question">Your score is {score}</p>
-    </div>
+  <div>
+    <h3>Assertions</h3>
+    <p data-testid="feedback-total-question">
+      You got {assertions} assertions!
+    </p>
+    <h3>Your Score</h3>
+    <p data-testid="feedback-total-question">Your score is {score}</p>
+  </div>
 );
 
 class Feedback extends Component {
