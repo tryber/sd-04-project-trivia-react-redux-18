@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-const feedbackMessage = (score) =>
-  score >= 3 ? 'Mandou bem!' : 'Podia ser melhor...';
-const feedbackResults = (score, assertions) => {
-  return (
+const feedbackMessage = (score) => {
+  return (score >= 3) ? 'Mandou bem!' : 'Podia ser melhor...'
+};
+const feedbackResults = (score, assertions) => (
     <div>
       <h3>Assertions</h3>
       <p data-testid="feedback-total-question">
@@ -13,8 +13,7 @@ const feedbackResults = (score, assertions) => {
       <h3>Your Score</h3>
       <p data-testid="feedback-total-question">Your score is {score}</p>
     </div>
-  );
-};
+);
 
 class Feedback extends Component {
   render() {
