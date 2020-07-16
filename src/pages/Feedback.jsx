@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-const feedbackMessage = (score) => score >= 3 ? 'Mandou bem!' : 'Podia ser melhor...';
+const feedbackMessage = (score) =>
+  score >= 3 ? 'Mandou bem!' : 'Podia ser melhor...';
 const feedbackResults = (score, assertions) => {
   return (
     <div>
