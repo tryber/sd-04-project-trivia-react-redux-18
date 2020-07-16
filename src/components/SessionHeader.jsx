@@ -1,10 +1,11 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import emailHash from '../services/genEmailHash';
 import './SessionHeader.css';
 
 const getUserInfo = () => JSON.parse(localStorage.getItem('state'));
 
-const SessionHeader = () => (
+const SessionHeader = ({ score }) => (
   <header className="session-header">
     <div className="player-info">
       <img
@@ -19,8 +20,12 @@ const SessionHeader = () => (
         {getUserInfo().player.name}
       </h3>
     </div>
-    <h3 data-testid="header-score">{`Score: ${getUserInfo().score}`}</h3>
+    <h3 data-testid="header-score">{!score ? 0 : score}</h3>
   </header>
 );
 
-export default SessionHeader;
+const mapStateToProps = (state) => ({
+  score: state.reducer.player.score,
+});
+
+export default connect(mapStateToProps)(SessionHeader);
