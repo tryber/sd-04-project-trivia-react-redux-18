@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
+import SessionHeader from '../components/SessionHeader';
 
 class Game extends Component {
   render() {
-    return <h1>Game</h1>;
+    return <SessionHeader />;
   }
 }
 
