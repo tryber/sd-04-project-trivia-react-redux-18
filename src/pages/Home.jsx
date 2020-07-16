@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import { saveUserInfo } from '../redux/actions/index';
 
@@ -118,5 +119,9 @@ class Home extends Component {
 const mapDispatchToProps = (dispatch) => ({
   saveInfo: (payload) => dispatch(saveUserInfo(payload)),
 });
+
+Home.propTypes = {
+  saveInfo: PropTypes.func.isRequired,
+};
 
 export default connect(null, mapDispatchToProps)(Home);
