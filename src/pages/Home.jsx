@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+
+import { saveUserInfo } from '../redux/actions/index';
 
 import { getToken } from '../services/api';
 
@@ -9,6 +12,7 @@ class Home extends Component {
     this.state = {
       email: '',
       username: '',
+      token: '',
       redirectPlay: false,
       redirectConfig: false,
     };
@@ -27,10 +31,14 @@ class Home extends Component {
   }
 
   handlePlay() {
+    const { saveInfo } = this.props;
+    const { email, username } = this.state;
     getToken().then((json) => {
       localStorage.setItem('token', json.token);
-      this.setState({ redirectPlay: true });
+      this.setState({ redirectPlay: true, token: json.token });
     });
+
+    saveInfo({ player: { name: username, gravatarEmail: email } });
   }
 
   handleConfig() {
@@ -107,4 +115,8 @@ class Home extends Component {
   }
 }
 
-export default Home;
+const mapDispatchToProps = (dispatch) => ({
+  saveInfo: (payload) => dispatch(saveUserInfo(payload)),
+});
+
+export default connect(null, mapDispatchToProps)(Home);
