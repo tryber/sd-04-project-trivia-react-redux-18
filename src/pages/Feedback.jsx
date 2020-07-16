@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 const feedbackMessage = (score) => (
   (score >= 3) ? 'Mandou bem!' : 'Podia ser melhor...'
@@ -37,4 +38,4 @@ class Feedback extends Component {
   }
 }
 
-export default Feedback;
+export default connect(null, null)(Feedback);
