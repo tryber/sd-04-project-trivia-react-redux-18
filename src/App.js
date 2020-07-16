@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Home from './pages/Home';
 import Settings from './pages/Settings';
 import Game from './pages/Game';
-import Feedback from  './pages/Feedback';
+import Feedback from './pages/Feedback';
 
 export default function App() {
   return (
