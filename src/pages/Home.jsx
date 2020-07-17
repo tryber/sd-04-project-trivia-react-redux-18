@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import { saveUserInfo } from '../redux/actions/index';
+import { saveUserInfo, saveToken } from '../redux/actions/index';
 
 import { getToken } from '../services/api';
 
@@ -32,10 +32,10 @@ class Home extends Component {
   }
 
   handlePlay() {
-    const { saveInfo } = this.props;
+    const { saveInfo, saveToken } = this.props;
     const { email, username } = this.state;
     getToken().then((json) => {
-      localStorage.setItem('token', json.token);
+      saveToken(json.token);
       this.setState({ redirectPlay: true, token: json.token });
     });
 
@@ -118,6 +118,7 @@ class Home extends Component {
 
 const mapDispatchToProps = (dispatch) => ({
   saveInfo: (payload) => dispatch(saveUserInfo(payload)),
+  saveToken: (payload) => dispatch(saveToken(payload)),
 });
 
 Home.propTypes = {

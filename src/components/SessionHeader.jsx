@@ -4,8 +4,6 @@ import PropTypes from 'prop-types';
 import emailHash from '../services/genEmailHash';
 import './SessionHeader.css';
 
-const getUserInfo = () => JSON.parse(localStorage.getItem('state'));
-
 class SessionHeader extends Component {
   render() {
     const { email, name, score } = this.props;
