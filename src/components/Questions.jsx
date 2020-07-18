@@ -35,8 +35,8 @@ class Questions extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  questionIndex: state.reducer.questions.questionIndex,
-  questions: state.reducer.questions.questionsItems,
+  questionIndex: state.questions.questionIndex,
+  questions: state.questions.questionsItems,
 });
 
 export default connect(mapStateToProps)(Questions);

@@ -26,9 +26,9 @@ class SessionHeader extends Component {
   }
 }
 const mapStateToProps = (state) => ({
-  score: state.reducer.player.score,
-  name: state.reducer.player.name,
-  email: state.reducer.player.gravatarEmail,
+  score: state.userInfo.player.score,
+  name: state.userInfo.player.name,
+  email: state.userInfo.player.gravatarEmail,
 });
 
 SessionHeader.propTypes = {

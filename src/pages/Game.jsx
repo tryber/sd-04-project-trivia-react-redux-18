@@ -33,7 +33,7 @@ class Game extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  token: state.reducer.token,
+  token: state.userInfo.token,
 });
 
 const mapDispatchToProps = (dispatch) => ({
