@@ -3,6 +3,7 @@ export const SAVE_TOKEN = 'SAVE_TOKEN';
 export const SAVE_QUESTIONS = 'SAVE_QUESTIONS';
 export const UPDATE_QUESTION_INDEX = 'UPDATE_QUESTION_INDEX';
 export const SAVE_ANSWERS = 'SAVE_ANSWERS';
+export const UPDATE_ANSWERS_BTNS = 'UPDATE_ANSWERS_BTNS';
 
 export const saveUserInfo = (payload) => ({
   type: SAVE_USER_INFO,
@@ -26,4 +27,8 @@ export const updateQuestionIndex = () => ({
 export const saveAnswers = (payload) => ({
   type: SAVE_ANSWERS,
   payload,
+});
+
+export const updateAnswersBtns = () => ({
+  type: UPDATE_ANSWERS_BTNS,
 });
