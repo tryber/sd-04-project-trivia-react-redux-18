@@ -1,45 +1,27 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { saveAnswers, updateAnswersBtns } from '../redux/actions';
+import { updateIsDisabled } from '../redux/actions';
 
 class AnswerOptions extends Component {
   constructor(props) {
     super(props);
 
-    this.currentQuestion = this.currentQuestion.bind(this);
-    this.possibleAnswers = this.possibleAnswers.bind(this);
-    this.checkCorrectAnswer = this.checkCorrectAnswer.bind(this);
+    this.createButton = this.createButton.bind(this);
   }
 
-  componentDidUpdate() {
-    const { questions, saveAnswers, answersOptions } = this.props;
-    if (questions.length)
-      if (!answersOptions.length)
-        saveAnswers(this.possibleAnswers(this.currentQuestion()));
-  }
-
-  currentQuestion() {
-    const { questions, questionIndex } = this.props;
-    const currentQuestion = questions.filter(
-      (question, index) => index === questionIndex,
-    );
-    return currentQuestion[0];
-  }
-
-  possibleAnswers(question) {
-    return [...question.incorrect_answers, question.correct_answer].sort(
-      () => Math.random() - 0.5,
-    );
-  }
-
-  checkCorrectAnswer(answer, index) {
-    const { isDisabled, updateAnswersBtns } = this.props;
-    return answer === this.currentQuestion().correct_answer ? (
+  createButton(answer, index) {
+    const {
+      questions,
+      questionIndex,
+      isDisabled,
+      updateIsDisabled,
+    } = this.props;
+    return answer === questions[questionIndex].correct_answer ? (
       <button
         type="button"
         key={answer}
         data-testid="correct-answer"
-        onClick={() => updateAnswersBtns()}
+        onClick={() => updateIsDisabled()}
         disabled={isDisabled}
       >
         {answer}
@@ -49,7 +31,7 @@ class AnswerOptions extends Component {
         type="button"
         key={answer}
         data-testid={`wrong-answer-${index}`}
-        onClick={() => updateAnswersBtns()}
+        onClick={() => updateIsDisabled()}
         disabled={isDisabled}
       >
         {answer}
@@ -58,12 +40,13 @@ class AnswerOptions extends Component {
   }
 
   render() {
-    console.log(this.currentQuestion());
-    const { answersOptions } = this.props;
-    return (
+    const { questionIndex, possibleAnswers } = this.props;
+    return !possibleAnswers.length ? (
+      <h3>Loading...</h3>
+    ) : (
       <div>
-        {answersOptions.map((answer, index) =>
-          this.checkCorrectAnswer(answer, index),
+        {possibleAnswers[questionIndex].map((item, index) =>
+          this.createButton(item, index),
         )}
       </div>
     );
@@ -73,13 +56,12 @@ class AnswerOptions extends Component {
 const mapStateToProps = (state) => ({
   questionIndex: state.questions.questionIndex,
   questions: state.questions.questionsItems,
-  answersOptions: state.answers.options,
+  possibleAnswers: state.answers.options,
   isDisabled: state.answers.isDisabled,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  saveAnswers: (answers) => dispatch(saveAnswers(answers)),
-  updateAnswersBtns: () => dispatch(updateAnswersBtns()),
+  updateIsDisabled: () => dispatch(updateIsDisabled()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AnswerOptions);

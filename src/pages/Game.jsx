@@ -1,35 +1,33 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import Home from '../pages/Home';
 import {
-  saveQuestions,
   updateQuestionIndex,
-  updateAnswersBtns,
+  fetchQuestions,
+  updateIsDisabled,
 } from '../redux/actions';
 import SessionHeader from '../components/SessionHeader';
 import Questions from '../components/Questions';
 import AnswerOptions from '../components/AnswerOptions';
-import { getQuestions } from '../services/api';
 import './Game.css';
 
 class Game extends Component {
-  constructor(props) {
-    super(props);
-    this.handleRedirect = this.handleRedirect.bind(this);
-  }
-
   componentDidMount() {
-    const { token, saveQuestions } = this.props;
-    getQuestions(5, token).then((data) => saveQuestions(data.results));
-  }
-
-  handleRedirect() {
-    const { questionIndex } = this.props;
-    if (questionIndex === '5') return <Redirect to="/feedback" />;
+    const { fetchQuestions } = this.props;
+    fetchQuestions();
   }
 
   render() {
-    const { updateQuestionIndex, isDisabled, updateIsDisabled } = this.props;
+    const {
+      updateQuestionIndex,
+      isDisabled,
+      updateIsDisabled,
+      questionIndex,
+    } = this.props;
+    if (questionIndex === 5) {
+      return <Redirect to={Home} />;
+    }
     return (
       <div className="game-page-container">
         <SessionHeader />
@@ -44,7 +42,6 @@ class Game extends Component {
                 data-testid="btn-next"
                 onClick={() => {
                   updateQuestionIndex();
-                  this.handleRedirect();
                   updateIsDisabled();
                 }}
               >
@@ -59,15 +56,14 @@ class Game extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  token: state.userInfo.token,
   isDisabled: state.answers.isDisabled,
   questionIndex: state.questions.questionIndex,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  saveQuestions: (questions) => dispatch(saveQuestions(questions)),
   updateQuestionIndex: () => dispatch(updateQuestionIndex()),
-  updateIsDisabled: () => dispatch(updateAnswersBtns()),
+  fetchQuestions: () => dispatch(fetchQuestions()),
+  updateIsDisabled: () => dispatch(updateIsDisabled()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Game);
