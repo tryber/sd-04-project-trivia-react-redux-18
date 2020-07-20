@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 class Questions extends Component {
   render() {
     const { questions, questionIndex, questionsLoading } = this.props;
-    let currentQuestion = questions.filter(
+    const currentQuestion = questions.filter(
       (question, index) => index === questionIndex,
     );
     return questionsLoading ? (
@@ -12,9 +13,9 @@ class Questions extends Component {
     ) : (
       <div className="question-container">
         <div className="category-container">
-          {currentQuestion.map((question, index) => (
+          {currentQuestion.map((question) => (
             <p
-              key={`${question.category}${index}`}
+              key={`${question.category}${question.type}`}
               className="question-category"
               data-testid="question-category"
             >
@@ -22,9 +23,9 @@ class Questions extends Component {
             </p>
           ))}
         </div>
-        {currentQuestion.map((question, index) => (
+        {currentQuestion.map((question) => (
           <p
-            key={`${question.question}${index}`}
+            key={`${question.question}${question.type}`}
             className="question"
             data-testid="question-text"
           >
@@ -41,5 +42,11 @@ const mapStateToProps = (state) => ({
   questions: state.questions.questionsItems,
   questionsLoading: state.questions.loading,
 });
+
+Questions.propTypes = {
+  questions: PropTypes.arrayOf(PropTypes.object).isRequired,
+  questionIndex: PropTypes.number.isRequired,
+  questionsLoading: PropTypes.bool.isRequired,
+};
 
 export default connect(mapStateToProps)(Questions);

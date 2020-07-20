@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { updateIsDisabled } from '../redux/actions';
 
 class AnswerOptions extends Component {
@@ -14,14 +15,14 @@ class AnswerOptions extends Component {
       questions,
       questionIndex,
       isDisabled,
-      updateIsDisabled,
+      changeIsDisabled,
     } = this.props;
     return answer === questions[questionIndex].correct_answer ? (
       <button
         type="button"
         key={answer}
         data-testid="correct-answer"
-        onClick={() => updateIsDisabled()}
+        onClick={() => changeIsDisabled()}
         disabled={isDisabled}
       >
         {answer}
@@ -31,7 +32,7 @@ class AnswerOptions extends Component {
         type="button"
         key={answer}
         data-testid={`wrong-answer-${index}`}
-        onClick={() => updateIsDisabled()}
+        onClick={() => changeIsDisabled()}
         disabled={isDisabled}
       >
         {answer}
@@ -61,7 +62,15 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  updateIsDisabled: () => dispatch(updateIsDisabled()),
+  changeIsDisabled: () => dispatch(updateIsDisabled()),
 });
+
+AnswerOptions.propTypes = {
+  questions: PropTypes.arrayOf(PropTypes.object).isRequired,
+  questionIndex: PropTypes.number.isRequired,
+  isDisabled: PropTypes.bool.isRequired,
+  changeIsDisabled: PropTypes.func.isRequired,
+  possibleAnswers: PropTypes.arrayOf(PropTypes.array).isRequired,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(AnswerOptions);
