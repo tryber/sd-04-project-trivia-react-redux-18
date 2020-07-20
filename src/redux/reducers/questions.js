@@ -31,10 +31,7 @@ const questions = (state = INITIAL_STATE, action) => {
     case actions.UPDATE_QUESTION_INDEX:
       return {
         ...state,
-        questionIndex:
-          state.questionIndex < 5
-            ? state.questionIndex + 1
-            : state.questionIndex,
+        questionIndex: state.questionIndex + 1,
       };
     default:
       return state;

@@ -33,23 +33,6 @@ export const fetchQuestionsFailure = (error) => ({
   payload: error,
 });
 
-export const fetchQuestions = () => {
-  return function (dispatch, getState) {
-    dispatch(fetchQuestionsRequest());
-    getQuestions(5, getState().userInfo.token)
-      .then((response) => {
-        dispatch(fetchQuestionsSuccess(response.results));
-        const answers = response.results.map((item) =>
-          [...item.incorrect_answers, item.correct_answer].sort(
-            () => Math.random() - 0.5,
-          ),
-        );
-        dispatch(savePossibleAnswers(answers));
-      })
-      .catch((error) => dispatch(fetchQuestionsFailure()));
-  };
-};
-
 export const updateQuestionIndex = () => ({
   type: UPDATE_QUESTION_INDEX,
 });
@@ -62,3 +45,18 @@ export const savePossibleAnswers = (payload) => ({
 export const updateIsDisabled = () => ({
   type: UPDATE_IS_DISABLED,
 });
+
+export const fetchQuestions = () => (dispatch, getState) => {
+  dispatch(fetchQuestionsRequest());
+  getQuestions(5, getState().userInfo.token)
+    .then((response) => {
+      dispatch(fetchQuestionsSuccess(response.results));
+      const answers = response.results.map((item) =>
+        [...item.incorrect_answers, item.correct_answer].sort(
+          () => Math.random() - 0.5,
+        ),
+      );
+      dispatch(savePossibleAnswers(answers));
+    })
+    .catch((error) => dispatch(fetchQuestionsFailure(error)));
+};
