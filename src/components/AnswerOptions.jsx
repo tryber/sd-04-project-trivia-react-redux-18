@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { updateIsDisabled } from '../redux/actions';
 
+import './AnswerOptions.css';
+
 class AnswerOptions extends Component {
   constructor(props) {
     super(props);
@@ -23,6 +25,7 @@ class AnswerOptions extends Component {
         data-testid="correct-answer"
         onClick={() => updateIsDisabled()}
         disabled={isDisabled}
+        className={isDisabled ? 'btn-answer correct-answer' : 'btn-answer'}
       >
         {answer}
       </button>
@@ -33,6 +36,7 @@ class AnswerOptions extends Component {
         data-testid={`wrong-answer-${index}`}
         onClick={() => updateIsDisabled()}
         disabled={isDisabled}
+        className={isDisabled ? 'btn-answer incorrect-answer' : 'btn-answer'}
       >
         {answer}
       </button>
