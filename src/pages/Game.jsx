@@ -79,6 +79,7 @@ Game.propTypes = {
   isDisabled: PropTypes.bool.isRequired,
   changeIsDisabled: PropTypes.func.isRequired,
   questionIndex: PropTypes.number.isRequired,
+  getQuestions: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Game);

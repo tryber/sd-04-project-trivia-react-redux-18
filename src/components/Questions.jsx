@@ -13,7 +13,7 @@ class Questions extends Component {
     ) : (
       <div className="question-container">
         <div className="category-container">
-          {currentQuestion.map((question, index) => (
+          {currentQuestion.map((question) => (
             <p
               key={`${question.category}${question.type}`}
               className="question-category"
@@ -23,7 +23,7 @@ class Questions extends Component {
             </p>
           ))}
         </div>
-        {currentQuestion.map((question, index) => (
+        {currentQuestion.map((question) => (
           <p
             key={`${question.question}${question.type}`}
             className="question"
