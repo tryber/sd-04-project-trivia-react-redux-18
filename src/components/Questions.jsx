@@ -3,11 +3,13 @@ import { connect } from 'react-redux';
 
 class Questions extends Component {
   render() {
-    const { questions, questionIndex } = this.props;
+    const { questions, questionIndex, questionsLoading } = this.props;
     let currentQuestion = questions.filter(
       (question, index) => index === questionIndex,
     );
-    return (
+    return questionsLoading ? (
+      <h3>Loading...</h3>
+    ) : (
       <div className="question-container">
         <div className="category-container">
           {currentQuestion.map((question, index) => (
@@ -37,6 +39,7 @@ class Questions extends Component {
 const mapStateToProps = (state) => ({
   questionIndex: state.questions.questionIndex,
   questions: state.questions.questionsItems,
+  questionsLoading: state.questions.loading,
 });
 
 export default connect(mapStateToProps)(Questions);
