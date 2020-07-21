@@ -5,8 +5,7 @@ import PropTypes from 'prop-types';
 
 import SessionHeader from '../components/SessionHeader';
 
-const feedbackMessage = (score) =>
-  score >= 3 ? 'Mandou bem!' : 'Podia ser melhor...';
+const feedbackMessage = (score) => (score >= 3 ? 'Mandou bem!' : 'Podia ser melhor...');
 const feedbackResults = (score, assertions) => (
   <div>
     <h3>Assertions</h3>

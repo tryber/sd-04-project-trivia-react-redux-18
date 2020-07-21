@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { updateTimer } from '../redux/actions';
+import PropTypes from 'prop-types';
 
 class Timing extends React.Component {
   componentDidMount() {
@@ -27,5 +28,10 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   changeTimer: () => dispatch(updateTimer()),
 });
+
+Timing.propTypes = {
+  changeTimer: PropTypes.func.isRequired,
+  timer: PropTypes.string.isRequired,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Timing);
