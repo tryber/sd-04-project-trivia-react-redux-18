@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { updateIsDisabled } from '../redux/actions';
+import { updateIsDisabled, saveIntervalId } from '../redux/actions';
 import Timing from '../components/Timing';
 
 import './AnswerOptions.css';
 
-import Timing from './Timing';
-import './AnswerOptions.css';
 
 class AnswerOptions extends Component {
   constructor(props) {
@@ -22,13 +20,17 @@ class AnswerOptions extends Component {
       questionIndex,
       isDisabled,
       changeIsDisabled,
+      intervalId,
     } = this.props;
     return answer === questions[questionIndex].correct_answer ? (
       <button
         type="button"
         key={answer}
         data-testid="correct-answer"
-        onClick={() => changeIsDisabled()}
+        onClick={() => {
+          changeIsDisabled();
+          clearInterval(intervalId);
+        }}
         disabled={isDisabled}
         className={isDisabled ? 'btn-answer correct-answer' : 'btn-answer'}
       >
@@ -39,7 +41,10 @@ class AnswerOptions extends Component {
         type="button"
         key={answer}
         data-testid={`wrong-answer-${index}`}
-        onClick={() => changeIsDisabled()}
+        onClick={() => {
+          changeIsDisabled();
+          clearInterval(intervalId);
+        }}
         disabled={isDisabled}
         className={isDisabled ? 'btn-answer incorrect-answer' : 'btn-answer'}
       >
@@ -69,10 +74,12 @@ const mapStateToProps = (state) => ({
   possibleAnswers: state.answers.options,
   isDisabled: state.answers.isDisabled,
   timer: state.time.time,
+  intervalId: state.time.intervalId,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   changeIsDisabled: () => dispatch(updateIsDisabled()),
+  changeIntervalId: (payload) => dispatch(saveIntervalId(payload))
 });
 
 AnswerOptions.propTypes = {

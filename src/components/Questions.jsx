@@ -32,7 +32,6 @@ class Questions extends Component {
             {question.question}
           </p>
         ))}
-        <Timing />
       </div>
     );
   }

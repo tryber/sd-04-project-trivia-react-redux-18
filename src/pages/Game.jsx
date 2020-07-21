@@ -6,6 +6,9 @@ import {
   updateQuestionIndex,
   fetchQuestions,
   updateIsDisabled,
+  updateTimer,
+  saveIntervalId,
+  resetTimer
 } from '../redux/actions';
 import SessionHeader from '../components/SessionHeader';
 import Questions from '../components/Questions';
@@ -18,11 +21,19 @@ class Game extends Component {
   constructor(props) {
     super(props);
     this.renderNextButton = this.renderNextButton.bind(this);
+    this.handleTimer = this.handleTimer.bind(this);
   }
 
   componentDidMount() {
     const { getQuestions } = this.props;
     getQuestions();
+  }
+
+  handleTimer() {
+    const { newTimer, changeTimer, changeIntervalId } = this.props;
+    this.intervalID = setInterval(() => changeTimer(), 1000)
+    changeIntervalId(this.intervalID);
+    newTimer();
   }
 
   renderNextButton() {
@@ -34,7 +45,9 @@ class Game extends Component {
           onClick={() => {
             changeQuestionIndex();
             changeIsDisabled();
+            this.handleTimer();
           }}
+          className="btn-next"
         >
           Próxima
         </button>
@@ -73,6 +86,9 @@ const mapDispatchToProps = (dispatch) => ({
   changeQuestionIndex: () => dispatch(updateQuestionIndex()),
   getQuestions: () => dispatch(fetchQuestions()),
   changeIsDisabled: () => dispatch(updateIsDisabled()),
+  changeTimer: () => dispatch(updateTimer()),
+  changeIntervalId: (intervalId) => dispatch(saveIntervalId(intervalId)),
+  newTimer: () => dispatch(resetTimer()),
 });
 
 Game.propTypes = {

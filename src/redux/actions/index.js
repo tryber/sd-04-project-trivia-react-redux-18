@@ -10,6 +10,8 @@ export const SAVE_POSSIBLE_ANSWERS = 'SAVE_POSSIBLE_ANSWERS';
 export const UPDATE_IS_DISABLED = 'UPDATE_IS_DISABLED';
 export const UPDATE_TIMER = 'UPDATE_TIMER';
 export const STOP_TIMER = 'STOP_TIMER';
+export const SAVE_INTERVAL_ID = 'SAVE_INTERVAL_ID';
+export const RESET_TIMER = 'RESET_TIMER';
 
 export const SAVE_RANKING = 'SAVE_RANKING';
 
@@ -78,3 +80,12 @@ export const stopTimer = (payload) => ({
   type: STOP_TIMER,
   payload,
 });
+
+export const resetTimer = () => ({
+  type: RESET_TIMER,
+});
+
+export const saveIntervalId = (payload) => ({
+  type: SAVE_INTERVAL_ID,
+  payload,
+})

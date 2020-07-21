@@ -1,7 +1,8 @@
 import * as actions from '../actions';
 
 const INITIAL_STATE = {
-  time: 5,
+  time: 30,
+  intervalId: '',
 };
 
 const updateTimer = (state = INITIAL_STATE, action) => {
@@ -15,6 +16,16 @@ const updateTimer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         time: 0,
+      };
+    case actions.RESET_TIMER:
+      return {
+        ...state,
+        time: 30,
+      };
+    case actions.SAVE_INTERVAL_ID:
+      return {
+        ...state,
+        intervalId: action.payload,
       };
     default:
       return state;

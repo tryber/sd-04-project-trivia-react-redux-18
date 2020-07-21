@@ -1,18 +1,24 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { updateTimer } from '../redux/actions';
+import { updateTimer, saveIntervalId } from '../redux/actions';
 
 class Timing extends React.Component {
   componentDidMount() {
-    const { changeTimer } = this.props;
+    const { changeTimer, changeIntervalId } = this.props;
 
     this.intervalID = setInterval(() => changeTimer(), 1000);
+    console.log(this.intervalID);
+    changeIntervalId(this.intervalID)
+  }
+
+  componentWillUnmount(){
+    clearInterval(this.intervalID);
   }
 
   render() {
-    const { timer } = this.props;
-    if (timer < 1) clearInterval(this.intervalID);
+    const { timer, intervalId } = this.props;
+    if (timer < 1) clearInterval(intervalId);
     return (
       <div>
         <p>Time: {timer}</p>
@@ -23,15 +29,17 @@ class Timing extends React.Component {
 
 const mapStateToProps = (state) => ({
   timer: state.time.time,
+  intervalId: state.time.intervalId,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   changeTimer: () => dispatch(updateTimer()),
+  changeIntervalId: (payload) => dispatch(saveIntervalId(payload))
 });
 
 Timing.propTypes = {
   changeTimer: PropTypes.func.isRequired,
-  timer: PropTypes.string.isRequired,
+  timer: PropTypes.number.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Timing);
