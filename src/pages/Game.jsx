@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import Home from '../pages/Home';
 import {
   updateQuestionIndex,
   fetchQuestions,
@@ -12,6 +11,8 @@ import SessionHeader from '../components/SessionHeader';
 import Questions from '../components/Questions';
 import AnswerOptions from '../components/AnswerOptions';
 import './Game.css';
+
+// localStorage.setItem('player', JSON.stringify({name, assertions, score, gravatarEmail}))
 
 class Game extends Component {
   constructor(props) {
@@ -44,7 +45,7 @@ class Game extends Component {
   render() {
     const { questionIndex } = this.props;
     if (questionIndex === 5) {
-      return <Redirect to={Home} />;
+      return <Redirect to="/feedback" />;
     }
     return (
       <div className="game-page-container">

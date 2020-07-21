@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
-const feedbackMessage = (score) => (
-  (score >= 3) ? 'Mandou bem!' : 'Podia ser melhor...'
-);
+import SessionHeader from '../components/SessionHeader';
+
+const feedbackMessage = (score) =>
+  score >= 3 ? 'Mandou bem!' : 'Podia ser melhor...';
 const feedbackResults = (score, assertions) => (
   <div>
     <h3>Assertions</h3>
@@ -12,17 +14,19 @@ const feedbackResults = (score, assertions) => (
       You got {assertions} assertions!
     </p>
     <h3>Your Score</h3>
-    <p data-testid="feedback-total-question">Your score is {score}</p>
+    <p data-testid="feedback-total-score">Your score is {score}</p>
   </div>
 );
 
 class Feedback extends Component {
   render() {
+    const { assertions, score } = this.props;
     return (
       <div>
         <h1>Feedback</h1>
-        <h3 data-testid="feedback-text">{feedbackMessage()}</h3>
-        {feedbackResults()}
+        <SessionHeader />
+        <h3 data-testid="feedback-text">{feedbackMessage(score)}</h3>
+        {feedbackResults(score, assertions)}
         <Link to="/">
           <button type="button" data-testid="btn-play-again">
             JOGAR NOVAMENTE
@@ -38,4 +42,14 @@ class Feedback extends Component {
   }
 }
 
-export default connect(null, null)(Feedback);
+const mapStateToProps = (state) => ({
+  assertions: state.userInfo.player.assertions,
+  score: state.userInfo.player.score,
+});
+
+Feedback.propTypes = {
+  assertions: PropTypes.string.isRequired,
+  score: PropTypes.string.isRequired,
+};
+
+export default connect(mapStateToProps, null)(Feedback);

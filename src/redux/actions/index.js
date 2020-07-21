@@ -8,6 +8,15 @@ export const FETCH_QUESTIONS_FAILURE = 'FETCH_QUESTIONS_FAILURE';
 export const UPDATE_QUESTION_INDEX = 'UPDATE_QUESTION_INDEX';
 export const SAVE_POSSIBLE_ANSWERS = 'SAVE_POSSIBLE_ANSWERS';
 export const UPDATE_IS_DISABLED = 'UPDATE_IS_DISABLED';
+export const UPDATE_TIMER = 'UPDATE_TIMER';
+export const STOP_TIMER = 'STOP_TIMER';
+
+export const SAVE_RANKING = 'SAVE_RANKING';
+
+export const saveRanking = (payload) => ({
+  type: SAVE_RANKING,
+  payload,
+});
 
 export const saveUserInfo = (payload) => ({
   type: SAVE_USER_INFO,
@@ -60,3 +69,12 @@ export const fetchQuestions = () => (dispatch, getState) => {
     })
     .catch((error) => dispatch(fetchQuestionsFailure(error)));
 };
+
+export const updateTimer = () => ({
+  type: UPDATE_TIMER,
+});
+
+export const stopTimer = (payload) => ({
+  type: STOP_TIMER,
+  payload,
+});

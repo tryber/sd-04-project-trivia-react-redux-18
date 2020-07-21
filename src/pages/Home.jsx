@@ -36,6 +36,7 @@ class Home extends Component {
     const { email, username } = this.state;
     getToken().then((json) => {
       setToken(json.token);
+      localStorage.setItem('token', json.token);
       this.setState({ redirectPlay: true, token: json.token });
     });
 

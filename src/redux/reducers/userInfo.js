@@ -8,6 +8,7 @@ const INITIAL_STATE = {
     gravatarEmail: '',
   },
   token: '',
+  ranking: [],
 };
 
 const userInfo = (state = INITIAL_STATE, action) => {
@@ -25,6 +26,11 @@ const userInfo = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         token: action.payload,
+      };
+    case actions.SAVE_RANKING:
+      return {
+        ...state,
+        ranking: [...state.ranking, action.payload], // Rever
       };
     default:
       return state;

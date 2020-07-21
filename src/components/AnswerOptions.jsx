@@ -3,6 +3,9 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { updateIsDisabled } from '../redux/actions';
 
+import Timing from './Timing';
+import './AnswerOptions.css';
+
 class AnswerOptions extends Component {
   constructor(props) {
     super(props);
@@ -24,6 +27,7 @@ class AnswerOptions extends Component {
         data-testid="correct-answer"
         onClick={() => changeIsDisabled()}
         disabled={isDisabled}
+        className={isDisabled ? 'btn-answer correct-answer' : 'btn-answer'}
       >
         {answer}
       </button>
@@ -34,6 +38,7 @@ class AnswerOptions extends Component {
         data-testid={`wrong-answer-${index}`}
         onClick={() => changeIsDisabled()}
         disabled={isDisabled}
+        className={isDisabled ? 'btn-answer incorrect-answer' : 'btn-answer'}
       >
         {answer}
       </button>
@@ -45,10 +50,11 @@ class AnswerOptions extends Component {
     return !possibleAnswers.length ? (
       <h3>Loading...</h3>
     ) : (
-      <div>
+      <div className="order-buttons">
         {possibleAnswers[questionIndex].map((item, index) =>
           this.createButton(item, index),
         )}
+        <Timing />
       </div>
     );
   }
@@ -59,6 +65,7 @@ const mapStateToProps = (state) => ({
   questions: state.questions.questionsItems,
   possibleAnswers: state.answers.options,
   isDisabled: state.answers.isDisabled,
+  timer: state.time.time,
 });
 
 const mapDispatchToProps = (dispatch) => ({
