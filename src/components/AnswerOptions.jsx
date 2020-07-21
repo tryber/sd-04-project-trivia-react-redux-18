@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { updateIsDisabled } from '../redux/actions';
+import Timing from '../components/Timing';
 
 import './AnswerOptions.css';
 
@@ -52,6 +53,7 @@ class AnswerOptions extends Component {
         {possibleAnswers[questionIndex].map((item, index) =>
           this.createButton(item, index),
         )}
+        <Timing />
       </div>
     );
   }

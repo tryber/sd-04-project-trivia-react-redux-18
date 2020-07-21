@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import Timing from '../components/Timing';
 
 class Questions extends Component {
   render() {
@@ -31,6 +32,7 @@ class Questions extends Component {
             {question.question}
           </p>
         ))}
+        <Timing />
       </div>
     );
   }
