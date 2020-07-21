@@ -20,7 +20,7 @@ export const UPDATE_SCORE = 'UPDATE_SCORE';
 export const UPDATE_ASSERTIONS = 'UPDATE_ASSERTIONS';
 
 export const RESET_QUESTION_INDEX = 'RESET_QUESTION_INDEX';
- 
+
 export const updateRanking = (payload) => ({
   type: UPDATE_RANKING,
   payload,
