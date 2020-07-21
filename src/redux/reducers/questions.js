@@ -10,10 +10,7 @@ const INITIAL_STATE = {
 const questions = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case actions.FETCH_QUESTIONS_REQUEST:
-      return {
-        ...state,
-        loading: true,
-      };
+      return { ...state, loading: true };
     case actions.FETCH_QUESTIONS_SUCCESS:
       return {
         ...state,
@@ -34,13 +31,10 @@ const questions = (state = INITIAL_STATE, action) => {
         questionIndex: state.questionIndex + 1,
       };
     case actions.RESET_QUESTION_INDEX:
-      return {
-        ...state,
-        questionIndex: 0,
-      };
+      return { ...state, questionIndex: 0 };
     default:
       return state;
-  }
+  
 };
 
 export default questions;
