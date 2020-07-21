@@ -1,39 +1,37 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { updateTimer } from '../redux/actions';
 
 class Timing extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { time: 30 };
-    this.stopTiming = this.stopTiming.bind(this);
-  }
-
   componentDidMount() {
-    this.timing();
-  }
+    const { changeTimer } = this.props;
 
-  stopTiming() {
-    this.setState({ time: 0 });
-  }
-
-  timing() {
-    const { time } = this.state;
-    setTimeout(() => {
-      this.setState({
-        time: time - 1,
-      });
-      if (time === 0) return this.stopTiming();
-      return this.timing();
-    }, 1000);
+    this.intervalID = setInterval(() => changeTimer(), 1000);
   }
 
   render() {
-    const { time } = this.state;
+    const { timer } = this.props;
+    if (timer < 1) clearInterval(this.intervalID);
     return (
       <div>
-        <p>Time: {time}</p>
+        <p>Time: {timer}</p>
       </div>
     );
   }
 }
 
-export default Timing;
+const mapStateToProps = (state) => ({
+  timer: state.time.time,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  changeTimer: () => dispatch(updateTimer()),
+});
+
+Timing.propTypes = {
+  changeTimer: PropTypes.func.isRequired,
+  timer: PropTypes.string.isRequired,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Timing);

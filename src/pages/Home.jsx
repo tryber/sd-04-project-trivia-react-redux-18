@@ -32,10 +32,11 @@ class Home extends Component {
   }
 
   handlePlay() {
-    const { saveInfo, saveToken } = this.props;
+    const { saveInfo, setToken } = this.props;
     const { email, username } = this.state;
     getToken().then((json) => {
-      saveToken(json.token);
+      setToken(json.token);
+      localStorage.setItem('token', json.token);
       this.setState({ redirectPlay: true, token: json.token });
     });
 
@@ -118,11 +119,12 @@ class Home extends Component {
 
 const mapDispatchToProps = (dispatch) => ({
   saveInfo: (payload) => dispatch(saveUserInfo(payload)),
-  saveToken: (payload) => dispatch(saveToken(payload)),
+  setToken: (payload) => dispatch(saveToken(payload)),
 });
 
 Home.propTypes = {
   saveInfo: PropTypes.func.isRequired,
+  setToken: PropTypes.func.isRequired,
 };
 
 export default connect(null, mapDispatchToProps)(Home);

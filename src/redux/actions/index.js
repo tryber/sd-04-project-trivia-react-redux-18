@@ -8,6 +8,15 @@ export const FETCH_QUESTIONS_FAILURE = 'FETCH_QUESTIONS_FAILURE';
 export const UPDATE_QUESTION_INDEX = 'UPDATE_QUESTION_INDEX';
 export const SAVE_POSSIBLE_ANSWERS = 'SAVE_POSSIBLE_ANSWERS';
 export const UPDATE_IS_DISABLED = 'UPDATE_IS_DISABLED';
+export const UPDATE_TIMER = 'UPDATE_TIMER';
+export const STOP_TIMER = 'STOP_TIMER';
+
+export const SAVE_RANKING = 'SAVE_RANKING';
+
+export const saveRanking = (payload) => ({
+  type: SAVE_RANKING,
+  payload,
+});
 
 export const saveUserInfo = (payload) => ({
   type: SAVE_USER_INFO,
@@ -33,23 +42,6 @@ export const fetchQuestionsFailure = (error) => ({
   payload: error,
 });
 
-export const fetchQuestions = () => {
-  return function (dispatch, getState) {
-    dispatch(fetchQuestionsRequest());
-    getQuestions(5, getState().userInfo.token)
-      .then((response) => {
-        dispatch(fetchQuestionsSuccess(response.results));
-        const answers = response.results.map((item) =>
-          [...item.incorrect_answers, item.correct_answer].sort(
-            () => Math.random() - 0.5,
-          ),
-        );
-        dispatch(savePossibleAnswers(answers));
-      })
-      .catch((error) => dispatch(fetchQuestionsFailure()));
-  };
-};
-
 export const updateQuestionIndex = () => ({
   type: UPDATE_QUESTION_INDEX,
 });
@@ -61,4 +53,28 @@ export const savePossibleAnswers = (payload) => ({
 
 export const updateIsDisabled = () => ({
   type: UPDATE_IS_DISABLED,
+});
+
+export const fetchQuestions = () => (dispatch, getState) => {
+  dispatch(fetchQuestionsRequest());
+  getQuestions(5, getState().userInfo.token)
+    .then((response) => {
+      dispatch(fetchQuestionsSuccess(response.results));
+      const answers = response.results.map((item) =>
+        [...item.incorrect_answers, item.correct_answer].sort(
+          () => Math.random() - 0.5,
+        ),
+      );
+      dispatch(savePossibleAnswers(answers));
+    })
+    .catch((error) => dispatch(fetchQuestionsFailure(error)));
+};
+
+export const updateTimer = () => ({
+  type: UPDATE_TIMER,
+});
+
+export const stopTimer = (payload) => ({
+  type: STOP_TIMER,
+  payload,
 });

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import Home from '../pages/Home';
+import PropTypes from 'prop-types';
 import {
   updateQuestionIndex,
   fetchQuestions,
@@ -12,21 +12,40 @@ import Questions from '../components/Questions';
 import AnswerOptions from '../components/AnswerOptions';
 import './Game.css';
 
+// localStorage.setItem('player', JSON.stringify({name, assertions, score, gravatarEmail}))
+
 class Game extends Component {
+  constructor(props) {
+    super(props);
+    this.renderNextButton = this.renderNextButton.bind(this);
+  }
+
   componentDidMount() {
-    const { fetchQuestions } = this.props;
-    fetchQuestions();
+    const { getQuestions } = this.props;
+    getQuestions();
+  }
+
+  renderNextButton() {
+    const { changeQuestionIndex, isDisabled, changeIsDisabled } = this.props;
+    return (
+      isDisabled && (
+        <button
+          data-testid="btn-next"
+          onClick={() => {
+            changeQuestionIndex();
+            changeIsDisabled();
+          }}
+        >
+          Próxima
+        </button>
+      )
+    );
   }
 
   render() {
-    const {
-      updateQuestionIndex,
-      isDisabled,
-      updateIsDisabled,
-      questionIndex,
-    } = this.props;
+    const { questionIndex } = this.props;
     if (questionIndex === 5) {
-      return <Redirect to={Home} />;
+      return <Redirect to="/feedback" />;
     }
     return (
       <div className="game-page-container">
@@ -37,17 +56,7 @@ class Game extends Component {
           </div>
           <div className="right-container">
             <AnswerOptions />
-            {isDisabled && (
-              <button
-                data-testid="btn-next"
-                onClick={() => {
-                  updateQuestionIndex();
-                  updateIsDisabled();
-                }}
-              >
-                Próxima
-              </button>
-            )}
+            {this.renderNextButton()}
           </div>
         </div>
       </div>
@@ -61,9 +70,17 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  updateQuestionIndex: () => dispatch(updateQuestionIndex()),
-  fetchQuestions: () => dispatch(fetchQuestions()),
-  updateIsDisabled: () => dispatch(updateIsDisabled()),
+  changeQuestionIndex: () => dispatch(updateQuestionIndex()),
+  getQuestions: () => dispatch(fetchQuestions()),
+  changeIsDisabled: () => dispatch(updateIsDisabled()),
 });
+
+Game.propTypes = {
+  changeQuestionIndex: PropTypes.func.isRequired,
+  isDisabled: PropTypes.bool.isRequired,
+  changeIsDisabled: PropTypes.func.isRequired,
+  questionIndex: PropTypes.number.isRequired,
+  getQuestions: PropTypes.func.isRequired,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Game);
