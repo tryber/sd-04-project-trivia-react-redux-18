@@ -32,7 +32,7 @@ const mapStateToProps = (state) => ({
 });
 
 SessionHeader.propTypes = {
-  score: PropTypes.string.isRequired,
+  score: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,
 };

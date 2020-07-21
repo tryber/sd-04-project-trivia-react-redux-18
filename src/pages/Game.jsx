@@ -8,14 +8,15 @@ import {
   updateIsDisabled,
   updateTimer,
   saveIntervalId,
-  resetTimer
+  resetTimer,
+  updateRanking
 } from '../redux/actions';
 import SessionHeader from '../components/SessionHeader';
 import Questions from '../components/Questions';
 import AnswerOptions from '../components/AnswerOptions';
 import './Game.css';
 
-// localStorage.setItem('player', JSON.stringify({name, assertions, score, gravatarEmail}))
+import emailHash from '../services/genEmailHash';
 
 class Game extends Component {
   constructor(props) {
@@ -27,6 +28,11 @@ class Game extends Component {
   componentDidMount() {
     const { getQuestions } = this.props;
     getQuestions();
+  }
+
+  componentWillUnmount() {
+    const { intervalId } = this.props
+    clearInterval(intervalId);
   }
 
   handleTimer() {
@@ -56,8 +62,10 @@ class Game extends Component {
   }
 
   render() {
-    const { questionIndex } = this.props;
+    const { questionIndex, changeRanking, name, score, email } = this.props;
     if (questionIndex === 5) {
+      const imgAvatar = `https://www.gravatar.com/avatar/${emailHash(email)}`;
+      changeRanking({ name, score, picture: imgAvatar })
       return <Redirect to="/feedback" />;
     }
     return (
@@ -80,6 +88,10 @@ class Game extends Component {
 const mapStateToProps = (state) => ({
   isDisabled: state.answers.isDisabled,
   questionIndex: state.questions.questionIndex,
+  intervalId: state.time.intervalId,
+  name: state.userInfo.player.name,
+  score: state.userInfo.player.score,
+  email: state.userInfo.player.gravatarEmail,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -89,6 +101,7 @@ const mapDispatchToProps = (dispatch) => ({
   changeTimer: () => dispatch(updateTimer()),
   changeIntervalId: (intervalId) => dispatch(saveIntervalId(intervalId)),
   newTimer: () => dispatch(resetTimer()),
+  changeRanking: (payload) => dispatch(updateRanking(payload)),
 });
 
 Game.propTypes = {
@@ -97,6 +110,9 @@ Game.propTypes = {
   changeIsDisabled: PropTypes.func.isRequired,
   questionIndex: PropTypes.number.isRequired,
   getQuestions: PropTypes.func.isRequired,
+  changeTimer: PropTypes.func.isRequired,
+  changeIntervalId: PropTypes.func.isRequired,
+  newTimer: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Game);

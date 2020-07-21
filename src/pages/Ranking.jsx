@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import emailHash from '../services/genEmailHash';
+import ranking from '../redux/reducers/ranking';
 
 class Ranking extends Component {
   render() {
-    const { name, score, email } = this.props;
+    const { name, score, email, rank } = this.props;
     return (
       <div>
         <h1 data-testid="ranking-title">Ranking</h1>
@@ -16,12 +16,17 @@ class Ranking extends Component {
             Voltar ao Início
           </button>
         </Link>
-        <img
-          src={`https://www.gravatar.com/avatar/${emailHash(email)}`}
-          alt=""
-        />
-        <p data-testid={`player-name-${0}`}>{name}</p>
-        <p data-testid={`player-score-${0}`}>{score}</p>
+        {rank.map(({ name, score, picture }, index) => (
+        <div>
+          <img
+            src={picture}
+            alt={`${name} gravatar`}
+          /> 
+          <p data-testid={`player-name-${index}`}>{name}</p>
+          <p data-testid={`player-score-${index}`}>{score}</p>
+        </div>
+        ))}
+
       </div>
     );
   }
@@ -33,6 +38,7 @@ const mapStateToProps = (state) => ({
   name: state.userInfo.player.name,
   score: state.userInfo.player.score,
   email: state.userInfo.player.gravatarEmail,
+  rank: state.ranking.ranking,
 });
 
 Ranking.propTypes = {

@@ -33,6 +33,11 @@ const questions = (state = INITIAL_STATE, action) => {
         ...state,
         questionIndex: state.questionIndex + 1,
       };
+    case actions.RESET_QUESTION_INDEX:
+      return {
+        ...state,
+        questionIndex: 0,
+      };
     default:
       return state;
   }

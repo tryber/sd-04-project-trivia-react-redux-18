@@ -1,26 +1,52 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { updateIsDisabled, saveIntervalId } from '../redux/actions';
+import {
+  updateIsDisabled,
+  saveIntervalId,
+  updateScore,
+  updateAssertions
+} from '../redux/actions';
 import Timing from '../components/Timing';
 
 import './AnswerOptions.css';
-
 
 class AnswerOptions extends Component {
   constructor(props) {
     super(props);
 
     this.createButton = this.createButton.bind(this);
+    this.calculateScore = this.calculateScore.bind(this);
+    this.saveLocalStorage = this.saveLocalStorage.bind(this);
+  }
+
+  saveLocalStorage(player) {
+    localStorage.setItem('player', JSON.stringify(player));
+  }
+
+  calculateScore() {
+    const { timer, questions, questionIndex, changeScore, player } = this.props;
+
+    let difficulty = questions[questionIndex].difficulty;
+
+    console.log(questions[questionIndex].difficulty);
+
+    if (difficulty === 'hard') {
+      changeScore(10 + timer * 3);
+    }
+    if (difficulty === 'medium') {
+      changeScore(10 + timer * 2);
+    }
+    if (difficulty === 'easy') {
+      changeScore(10 + timer * 1);
+    }
+
+    this.saveLocalStorage(player);
   }
 
   createButton(answer, index) {
-    const {
-      questions,
-      questionIndex,
-      isDisabled,
-      changeIsDisabled,
-      intervalId,
+    const { questions, questionIndex, isDisabled,
+      changeIsDisabled, intervalId, player, changeAssertions
     } = this.props;
     return answer === questions[questionIndex].correct_answer ? (
       <button
@@ -30,6 +56,8 @@ class AnswerOptions extends Component {
         onClick={() => {
           changeIsDisabled();
           clearInterval(intervalId);
+          this.calculateScore();
+          changeAssertions();
         }}
         disabled={isDisabled}
         className={isDisabled ? 'btn-answer correct-answer' : 'btn-answer'}
@@ -44,6 +72,7 @@ class AnswerOptions extends Component {
         onClick={() => {
           changeIsDisabled();
           clearInterval(intervalId);
+          this.saveLocalStorage(player);
         }}
         disabled={isDisabled}
         className={isDisabled ? 'btn-answer incorrect-answer' : 'btn-answer'}
@@ -75,11 +104,18 @@ const mapStateToProps = (state) => ({
   isDisabled: state.answers.isDisabled,
   timer: state.time.time,
   intervalId: state.time.intervalId,
+  score: state.userInfo.player.score,
+  player: state.userInfo.player,
+  name: state.userInfo.player.name,
+  email: state.userInfo.player.gravatarEmail,
+  assertions: state.userInfo.player.assertions,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   changeIsDisabled: () => dispatch(updateIsDisabled()),
-  changeIntervalId: (payload) => dispatch(saveIntervalId(payload))
+  changeIntervalId: (payload) => dispatch(saveIntervalId(payload)),
+  changeScore: (payload) => dispatch(updateScore(payload)),
+  changeAssertions: () => dispatch(updateAssertions())
 });
 
 AnswerOptions.propTypes = {
@@ -88,6 +124,9 @@ AnswerOptions.propTypes = {
   isDisabled: PropTypes.bool.isRequired,
   changeIsDisabled: PropTypes.func.isRequired,
   possibleAnswers: PropTypes.arrayOf(PropTypes.array).isRequired,
+  timer: PropTypes.number.isRequired,
+  intervalId: PropTypes.number.isRequired,
+  changeIntervalId: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(AnswerOptions);

@@ -2,7 +2,7 @@ import * as actions from '../actions';
 
 const INITIAL_STATE = {
   time: 30,
-  intervalId: '',
+  intervalId: 0,
 };
 
 const updateTimer = (state = INITIAL_STATE, action) => {

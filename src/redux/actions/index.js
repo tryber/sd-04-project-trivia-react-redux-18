@@ -13,10 +13,16 @@ export const STOP_TIMER = 'STOP_TIMER';
 export const SAVE_INTERVAL_ID = 'SAVE_INTERVAL_ID';
 export const RESET_TIMER = 'RESET_TIMER';
 
-export const SAVE_RANKING = 'SAVE_RANKING';
+export const UPDATE_RANKING = 'UPDATE_RANKING';
 
-export const saveRanking = (payload) => ({
-  type: SAVE_RANKING,
+export const UPDATE_SCORE = 'UPDATE_SCORE';
+
+export const UPDATE_ASSERTIONS = 'UPDATE_ASSERTIONS';
+
+export const RESET_QUESTION_INDEX = 'RESET_QUESTION_INDEX';
+ 
+export const updateRanking = (payload) => ({
+  type: UPDATE_RANKING,
   payload,
 });
 
@@ -88,4 +94,17 @@ export const resetTimer = () => ({
 export const saveIntervalId = (payload) => ({
   type: SAVE_INTERVAL_ID,
   payload,
-})
+});
+
+export const updateScore = (payload) => ({
+  type: UPDATE_SCORE,
+  payload,
+});
+
+export const updateAssertions = () => ({
+  type: UPDATE_ASSERTIONS,
+});
+
+export const resetQuestionIndex = () => ({
+  type: RESET_QUESTION_INDEX,
+});

@@ -5,6 +5,8 @@ import PropTypes from 'prop-types';
 
 import SessionHeader from '../components/SessionHeader';
 
+import { resetQuestionIndex } from '../redux/actions';
+
 const feedbackMessage = (score) => (score >= 3 ? 'Mandou bem!' : 'Podia ser melhor...');
 const feedbackResults = (score, assertions) => (
   <div>
@@ -19,7 +21,7 @@ const feedbackResults = (score, assertions) => (
 
 class Feedback extends Component {
   render() {
-    const { assertions, score } = this.props;
+    const { assertions, score, resetIndex } = this.props;
     return (
       <div>
         <h1>Feedback</h1>
@@ -27,12 +29,12 @@ class Feedback extends Component {
         <h3 data-testid="feedback-text">{feedbackMessage(score)}</h3>
         {feedbackResults(score, assertions)}
         <Link to="/">
-          <button type="button" data-testid="btn-play-again">
+          <button type="button" data-testid="btn-play-again" onClick={() => resetIndex()}>
             JOGAR NOVAMENTE
           </button>
         </Link>
         <Link to="/ranking">
-          <button type="button" data-testid="btn-ranking">
+          <button type="button" data-testid="btn-ranking" onClick={() => resetIndex()} >
             VER RANKING
           </button>
         </Link>
@@ -46,9 +48,14 @@ const mapStateToProps = (state) => ({
   score: state.userInfo.player.score,
 });
 
+const mapDispatchToProps = (dispatch) => ({
+  resetIndex: () => dispatch(resetQuestionIndex()),
+})
+
 Feedback.propTypes = {
-  assertions: PropTypes.string.isRequired,
-  score: PropTypes.string.isRequired,
+  assertions: PropTypes.number.isRequired,
+  score: PropTypes.number.isRequired,
+  resetIndex: PropTypes.func.isRequired,
 };
 
-export default connect(mapStateToProps, null)(Feedback);
+export default connect(mapStateToProps, mapDispatchToProps)(Feedback);

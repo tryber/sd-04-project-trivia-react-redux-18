@@ -8,12 +8,7 @@ class Timing extends React.Component {
     const { changeTimer, changeIntervalId } = this.props;
 
     this.intervalID = setInterval(() => changeTimer(), 1000);
-    console.log(this.intervalID);
     changeIntervalId(this.intervalID)
-  }
-
-  componentWillUnmount(){
-    clearInterval(this.intervalID);
   }
 
   render() {
@@ -40,6 +35,8 @@ const mapDispatchToProps = (dispatch) => ({
 Timing.propTypes = {
   changeTimer: PropTypes.func.isRequired,
   timer: PropTypes.number.isRequired,
+  changeIntervalId: PropTypes.func.isRequired,
+  intervalId: PropTypes.number.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Timing);

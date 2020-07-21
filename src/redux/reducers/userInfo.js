@@ -3,12 +3,11 @@ import * as actions from '../actions';
 const INITIAL_STATE = {
   player: {
     name: '',
-    assertions: '',
-    score: '',
+    assertions: 0,
+    score: 0,
     gravatarEmail: '',
   },
   token: '',
-  ranking: [],
 };
 
 const userInfo = (state = INITIAL_STATE, action) => {
@@ -23,15 +22,23 @@ const userInfo = (state = INITIAL_STATE, action) => {
         },
       };
     case actions.SAVE_TOKEN:
+      return { ...state, token: action.payload };
+    case actions.UPDATE_SCORE:
       return {
         ...state,
-        token: action.payload,
-      };
-    case actions.SAVE_RANKING:
+        player: {
+          ...state.player,
+          score: state.player.score + action.payload,
+        }
+      }
+    case actions.UPDATE_ASSERTIONS:
       return {
         ...state,
-        ranking: [...state.ranking, action.payload], // Rever
-      };
+        player: {
+          ...state.player,
+          assertions: state.player.assertions + 1,
+        }
+      }
     default:
       return state;
   }
