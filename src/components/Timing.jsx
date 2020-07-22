@@ -8,7 +8,7 @@ class Timing extends React.Component {
     const { changeTimer, changeIntervalId } = this.props;
 
     this.intervalID = setInterval(() => changeTimer(), 1000);
-    changeIntervalId(this.intervalID)
+    changeIntervalId(this.intervalID);
   }
 
   render() {
@@ -29,7 +29,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   changeTimer: () => dispatch(updateTimer()),
-  changeIntervalId: (payload) => dispatch(saveIntervalId(payload))
+  changeIntervalId: (payload) => dispatch(saveIntervalId(payload)),
 });
 
 Timing.propTypes = {

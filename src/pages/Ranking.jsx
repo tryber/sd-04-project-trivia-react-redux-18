@@ -3,11 +3,9 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import ranking from '../redux/reducers/ranking';
-
 class Ranking extends Component {
   render() {
-    const { name, score, email, rank } = this.props;
+    const { rank } = this.props;
     return (
       <div>
         <h1 data-testid="ranking-title">Ranking</h1>
@@ -17,16 +15,12 @@ class Ranking extends Component {
           </button>
         </Link>
         {rank.map(({ name, score, picture }, index) => (
-        <div>
-          <img
-            src={picture}
-            alt={`${name} gravatar`}
-          /> 
-          <p data-testid={`player-name-${index}`}>{name}</p>
-          <p data-testid={`player-score-${index}`}>{score}</p>
-        </div>
+          <div>
+            <img src={picture} alt={`${name} gravatar`} />
+            <p data-testid={`player-name-${index}`}>{name}</p>
+            <p data-testid={`player-score-${index}`}>{score}</p>
+          </div>
         ))}
-
       </div>
     );
   }
