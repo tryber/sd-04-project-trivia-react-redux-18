@@ -34,18 +34,14 @@ const userInfo = (state = INITIAL_STATE, action) => {
     case actions.UPDATE_ASSERTIONS:
       return {
         ...state,
-<<<<<<< HEAD
-        player: {...state.player, assertions: state.player.assertions + 1 },
-=======
         player: {
           ...state.player,
           assertions: state.player.assertions + 1,
         },
->>>>>>> 7b42c58e90a79a61da41c9a2b9a217f543eabf48
       };
     default:
       return state;
-  };
+  }
 };
 
 export default userInfo;

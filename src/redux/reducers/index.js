@@ -5,6 +5,12 @@ import answers from './answers';
 import time from './time';
 import ranking from './ranking';
 
-const rootReducer = combineReducers({ userInfo, questions, answers, time, ranking });
+const rootReducer = combineReducers({
+  userInfo,
+  questions,
+  answers,
+  time,
+  ranking,
+});
 
 export default rootReducer;
