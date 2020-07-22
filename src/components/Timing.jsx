@@ -1,7 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { updateTimer, saveIntervalId } from '../redux/actions';
+import {
+  updateTimer,
+  saveIntervalId,
+  updateIsDisabled,
+} from '../redux/actions';
 
 class Timing extends React.Component {
   componentDidMount() {
@@ -12,8 +16,11 @@ class Timing extends React.Component {
   }
 
   render() {
-    const { timer, intervalId } = this.props;
-    if (timer < 1) clearInterval(intervalId);
+    const { timer, intervalId, changeIsDisabled } = this.props;
+    if (timer < 1) {
+      clearInterval(intervalId);
+      changeIsDisabled();
+    }
     return (
       <div>
         <p>Time: {timer}</p>
@@ -30,6 +37,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   changeTimer: () => dispatch(updateTimer()),
   changeIntervalId: (payload) => dispatch(saveIntervalId(payload)),
+  changeIsDisabled: () => dispatch(updateIsDisabled()),
 });
 
 Timing.propTypes = {
