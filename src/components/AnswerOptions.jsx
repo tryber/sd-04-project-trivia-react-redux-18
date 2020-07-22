@@ -11,6 +11,10 @@ import Timing from '../components/Timing';
 import './AnswerOptions.css';
 
 class AnswerOptions extends Component {
+  static saveLocalStorage(player) {
+    localStorage.setItem('player', JSON.stringify(player));
+  }
+
   constructor(props) {
     super(props);
 
@@ -19,9 +23,7 @@ class AnswerOptions extends Component {
     this.saveLocalStorage = this.saveLocalStorage.bind(this);
   }
 
-  saveLocalStorage(player) {
-    localStorage.setItem('player', JSON.stringify(player));
-  }
+
 
   calculateScore() {
     const { timer, questions, questionIndex, changeScore, player } = this.props;
@@ -77,7 +79,7 @@ class AnswerOptions extends Component {
         onClick={() => {
           changeIsDisabled();
           clearInterval(intervalId);
-          this.saveLocalStorage(player);
+          AsnwerOptions.saveLocalStorage(player);
         }}
         disabled={isDisabled}
         className={isDisabled ? 'btn-answer incorrect-answer' : 'btn-answer'}
