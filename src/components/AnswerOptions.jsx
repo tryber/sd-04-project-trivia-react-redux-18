@@ -39,7 +39,7 @@ class AnswerOptions extends Component {
       changeScore(10 + (timer * 1));
     }
 
-    this.saveLocalStorage(player);
+    AnswerOptions.saveLocalStorage(player);
   }
 
   createButton(answer, index) {
