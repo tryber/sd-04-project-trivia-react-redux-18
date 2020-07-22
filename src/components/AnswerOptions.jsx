@@ -132,6 +132,7 @@ AnswerOptions.propTypes = {
   intervalId: PropTypes.number.isRequired,
   changeScore: PropTypes.func.isRequired,
   changeAssertions: PropTypes.func.isRequired,
+  player: PropTypes.object.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(AnswerOptions);
