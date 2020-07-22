@@ -22,8 +22,6 @@ class AnswerOptions extends Component {
     this.calculateScore = this.calculateScore.bind(this);
   }
 
-
-
   calculateScore() {
     const { timer, questions, questionIndex, changeScore, player } = this.props;
 
@@ -78,7 +76,7 @@ class AnswerOptions extends Component {
         onClick={() => {
           changeIsDisabled();
           clearInterval(intervalId);
-          AsnwerOptions.saveLocalStorage(player);
+          AnswerOptions.saveLocalStorage(player);
         }}
         disabled={isDisabled}
         className={isDisabled ? 'btn-answer incorrect-answer' : 'btn-answer'}
