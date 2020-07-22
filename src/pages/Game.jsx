@@ -9,7 +9,7 @@ import {
   updateTimer,
   saveIntervalId,
   resetTimer,
-  updateRanking
+  updateRanking,
 } from '../redux/actions';
 import SessionHeader from '../components/SessionHeader';
 import Questions from '../components/Questions';
@@ -31,13 +31,13 @@ class Game extends Component {
   }
 
   componentWillUnmount() {
-    const { intervalId } = this.props
+    const { intervalId } = this.props;
     clearInterval(intervalId);
   }
 
   handleTimer() {
     const { newTimer, changeTimer, changeIntervalId } = this.props;
-    this.intervalID = setInterval(() => changeTimer(), 1000)
+    this.intervalID = setInterval(() => changeTimer(), 1000);
     changeIntervalId(this.intervalID);
     newTimer();
   }
@@ -65,7 +65,7 @@ class Game extends Component {
     const { questionIndex, changeRanking, name, score, email } = this.props;
     if (questionIndex === 5) {
       const imgAvatar = `https://www.gravatar.com/avatar/${emailHash(email)}`;
-      changeRanking({ name, score, picture: imgAvatar })
+      changeRanking({ name, score, picture: imgAvatar });
       return <Redirect to="/feedback" />;
     }
     return (
@@ -113,6 +113,10 @@ Game.propTypes = {
   changeTimer: PropTypes.func.isRequired,
   changeIntervalId: PropTypes.func.isRequired,
   newTimer: PropTypes.func.isRequired,
+  changeRanking: PropTypes.func.isRequired,
+  name: PropTypes.string.isRequired,
+  score: PropTypes.string.isRequired,
+  email: PropTypes.string.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Game);

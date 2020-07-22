@@ -7,7 +7,8 @@ import SessionHeader from '../components/SessionHeader';
 
 import { resetQuestionIndex } from '../redux/actions';
 
-const feedbackMessage = (score) => (score >= 3 ? 'Mandou bem!' : 'Podia ser melhor...');
+const feedbackMessage = (score) =>
+  score >= 3 ? 'Mandou bem!' : 'Podia ser melhor...';
 const feedbackResults = (score, assertions) => (
   <div>
     <h3>Assertions</h3>
@@ -29,12 +30,20 @@ class Feedback extends Component {
         <h3 data-testid="feedback-text">{feedbackMessage(score)}</h3>
         {feedbackResults(score, assertions)}
         <Link to="/">
-          <button type="button" data-testid="btn-play-again" onClick={() => resetIndex()}>
+          <button
+            type="button"
+            data-testid="btn-play-again"
+            onClick={() => resetIndex()}
+          >
             JOGAR NOVAMENTE
           </button>
         </Link>
         <Link to="/ranking">
-          <button type="button" data-testid="btn-ranking" onClick={() => resetIndex()} >
+          <button
+            type="button"
+            data-testid="btn-ranking"
+            onClick={() => resetIndex()}
+          >
             VER RANKING
           </button>
         </Link>
@@ -50,7 +59,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   resetIndex: () => dispatch(resetQuestionIndex()),
-})
+});
 
 Feedback.propTypes = {
   assertions: PropTypes.number.isRequired,

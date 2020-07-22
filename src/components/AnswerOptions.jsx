@@ -3,9 +3,8 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import {
   updateIsDisabled,
-  saveIntervalId,
   updateScore,
-  updateAssertions
+  updateAssertions,
 } from '../redux/actions';
 import Timing from '../components/Timing';
 
@@ -27,26 +26,32 @@ class AnswerOptions extends Component {
   calculateScore() {
     const { timer, questions, questionIndex, changeScore, player } = this.props;
 
-    let difficulty = questions[questionIndex].difficulty;
+    const difficulty = questions[questionIndex].difficulty;
 
     console.log(questions[questionIndex].difficulty);
 
     if (difficulty === 'hard') {
-      changeScore(10 + timer * 3);
+      changeScore(10 + (timer * 3));
     }
     if (difficulty === 'medium') {
-      changeScore(10 + timer * 2);
+      changeScore(10 + (timer * 2));
     }
     if (difficulty === 'easy') {
-      changeScore(10 + timer * 1);
+      changeScore(10 + (timer * 1));
     }
 
     this.saveLocalStorage(player);
   }
 
   createButton(answer, index) {
-    const { questions, questionIndex, isDisabled,
-      changeIsDisabled, intervalId, player, changeAssertions
+    const {
+      questions,
+      questionIndex,
+      isDisabled,
+      changeIsDisabled,
+      intervalId,
+      player,
+      changeAssertions,
     } = this.props;
     return answer === questions[questionIndex].correct_answer ? (
       <button
@@ -113,9 +118,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   changeIsDisabled: () => dispatch(updateIsDisabled()),
-  changeIntervalId: (payload) => dispatch(saveIntervalId(payload)),
   changeScore: (payload) => dispatch(updateScore(payload)),
-  changeAssertions: () => dispatch(updateAssertions())
+  changeAssertions: () => dispatch(updateAssertions()),
 });
 
 AnswerOptions.propTypes = {
@@ -126,7 +130,8 @@ AnswerOptions.propTypes = {
   possibleAnswers: PropTypes.arrayOf(PropTypes.array).isRequired,
   timer: PropTypes.number.isRequired,
   intervalId: PropTypes.number.isRequired,
-  changeIntervalId: PropTypes.func.isRequired,
+  changeScore: PropTypes.func.isRequired,
+  changeAssertions: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(AnswerOptions);
