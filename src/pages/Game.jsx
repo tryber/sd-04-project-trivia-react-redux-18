@@ -117,6 +117,7 @@ Game.propTypes = {
   name: PropTypes.string.isRequired,
   score: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,
+  intervalId: PropTypes.number.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Game);
