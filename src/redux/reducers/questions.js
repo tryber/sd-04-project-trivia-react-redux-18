@@ -7,7 +7,7 @@ const INITIAL_STATE = {
   error: '',
 };
 
-const questions = (state = INITIAL_STATE, action) => {
+ const questions = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case actions.FETCH_QUESTIONS_REQUEST:
       return { ...state, loading: true };
@@ -34,7 +34,7 @@ const questions = (state = INITIAL_STATE, action) => {
       return { ...state, questionIndex: 0 };
     default:
       return state;
-  
+  }
 };
 
 export default questions;
