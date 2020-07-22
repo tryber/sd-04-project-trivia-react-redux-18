@@ -34,10 +34,7 @@ const userInfo = (state = INITIAL_STATE, action) => {
     case actions.UPDATE_ASSERTIONS:
       return {
         ...state,
-        player: {
-          ...state.player,
-          assertions: state.player.assertions + 1,
-        },
+        player: { ...state.player, assertions: state.player.assertions + 1 },
       };
     default:
       return state;
