@@ -8,7 +8,8 @@ import SessionHeader from '../components/SessionHeader';
 import { resetQuestionIndex } from '../redux/actions';
 
 const feedbackMessage = (score) => {
-  return (score >= 3) ? 'Mandou bem!' : 'Podia ser melhor...';
+  const result = (score >= 3) ? 'Mandou bem!' : 'Podia ser melhor...';
+  return result;
 };
   
 const feedbackResults = (score, assertions) => (

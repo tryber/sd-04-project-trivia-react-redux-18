@@ -132,7 +132,12 @@ AnswerOptions.propTypes = {
   intervalId: PropTypes.number.isRequired,
   changeScore: PropTypes.func.isRequired,
   changeAssertions: PropTypes.func.isRequired,
-  player: PropTypes.object.isRequired,
+  player: PropTypes.shape({
+    name: PropTypes.string,
+    assertions: PropTypes.number,
+    score: PropTypes.number,
+    gravatarEmail: PropTypes.string,
+  }),
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(AnswerOptions);
