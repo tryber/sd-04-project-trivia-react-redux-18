@@ -20,7 +20,6 @@ class AnswerOptions extends Component {
 
     this.createButton = this.createButton.bind(this);
     this.calculateScore = this.calculateScore.bind(this);
-    this.saveLocalStorage = this.saveLocalStorage.bind(this);
   }
 
 
