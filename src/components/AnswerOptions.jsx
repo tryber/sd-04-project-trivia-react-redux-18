@@ -137,7 +137,7 @@ AnswerOptions.propTypes = {
     assertions: PropTypes.number,
     score: PropTypes.number,
     gravatarEmail: PropTypes.string,
-  }),
+  }).isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(AnswerOptions);

@@ -11,7 +11,7 @@ const feedbackMessage = (score) => {
   const result = (score >= 3) ? 'Mandou bem!' : 'Podia ser melhor...';
   return result;
 };
-  
+
 const feedbackResults = (score, assertions) => (
   <div>
     <h3>Assertions</h3>
