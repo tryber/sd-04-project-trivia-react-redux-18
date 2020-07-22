@@ -29,16 +29,11 @@ class Ranking extends Component {
 // localStorage.setItem('ranking', JSON.stringify([{name, score, picture: }]))
 
 const mapStateToProps = (state) => ({
-  name: state.userInfo.player.name,
-  score: state.userInfo.player.score,
-  email: state.userInfo.player.gravatarEmail,
   rank: state.ranking.ranking,
 });
 
 Ranking.propTypes = {
-  name: PropTypes.string.isRequired,
-  score: PropTypes.string.isRequired,
-  email: PropTypes.string.isRequired,
+  rank: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default connect(mapStateToProps, null)(Ranking);
