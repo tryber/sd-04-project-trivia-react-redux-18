@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 class Ranking extends Component {
   render() {
     const { rank } = this.props;
-    localStorage.setItem('ranking', JSON.stringify([{rank}]))
+    localStorage.setItem('ranking', JSON.stringify([{ rank }]));
     return (
       <div>
         <h1 data-testid="ranking-title">Ranking</h1>

@@ -49,7 +49,9 @@ class Home extends Component {
 
     localStorage.setItem(
       'state',
-      JSON.stringify({player: { name: '', assertions: '', score: '', gravatarEmail: '' }}),
+      JSON.stringify({
+        player: { name: '', assertions: '', score: '', gravatarEmail: '' },
+      }),
     );
 
     saveInfo({ player: { name: username, gravatarEmail: email } });

@@ -10,42 +10,48 @@ const INITIAL_STATE = {
   token: '',
 };
 
+const saveUserInfo = (state, action) => ({
+  ...state,
+  player: {
+    ...state.player,
+    name: action.payload.player.name,
+    gravatarEmail: action.payload.player.gravatarEmail,
+  },
+});
+
+const updateScore = (state, action) => ({
+  ...state,
+  player: {
+    ...state.player,
+    score: state.player.score + action.payload,
+  },
+});
+
+const resetPlayer = (state, action) => ({
+  ...state,
+  player: {
+    name: '',
+    assertions: 0,
+    score: 0,
+    gravatarEmail: '',
+  },
+});
+
 const userInfo = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case actions.SAVE_USER_INFO:
-      return {
-        ...state,
-        player: {
-          ...state.player,
-          name: action.payload.player.name,
-          gravatarEmail: action.payload.player.gravatarEmail,
-        },
-      };
+      return saveUserInfo(state, action);
     case actions.SAVE_TOKEN:
       return { ...state, token: action.payload };
     case actions.UPDATE_SCORE:
-      return {
-        ...state,
-        player: {
-          ...state.player,
-          score: state.player.score + action.payload,
-        },
-      };
+      return updateScore(state, action);
     case actions.UPDATE_ASSERTIONS:
       return {
         ...state,
         player: { ...state.player, assertions: state.player.assertions + 1 },
       };
     case actions.RESET_PLAYER:
-      return {
-        ...state,
-        player: {
-          name: '',
-          assertions: 0,
-          score: 0,
-          gravatarEmail: '',
-        }
-      }
+      return resetPlayer(state, action);
     default:
       return state;
   }

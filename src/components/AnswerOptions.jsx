@@ -20,7 +20,9 @@ class AnswerOptions extends Component {
   constructor(props) {
     super(props);
 
-    this.createButton = this.createButton.bind(this);
+    this.createButtons = this.createButtons.bind(this);
+    this.createCorrectButton = this.createCorrectButton.bind(this);
+    this.createIncorrectButton = this.createIncorrectButton.bind(this);
     this.calculateScore = this.calculateScore.bind(this);
   }
 
@@ -32,27 +34,26 @@ class AnswerOptions extends Component {
     console.log(questions[questionIndex].difficulty);
 
     if (difficulty === 'hard') {
-      changeScore(10 + (timer * 3));
+      changeScore(10 + timer * 3);
     }
     if (difficulty === 'medium') {
-      changeScore(10 + (timer * 2));
+      changeScore(10 + timer * 2);
     }
     if (difficulty === 'easy') {
-      changeScore(10 + (timer * 1));
+      changeScore(10 + timer * 1);
     }
   }
 
-  createButton(answer, index) {
+  createCorrectButton(answer) {
     const {
-      questions,
-      questionIndex,
       isDisabled,
       changeIsDisabled,
       intervalId,
       player,
       changeAssertions,
     } = this.props;
-    return answer === questions[questionIndex].correct_answer ? (
+
+    return (
       <button
         type="button"
         key={answer}
@@ -69,7 +70,12 @@ class AnswerOptions extends Component {
       >
         {answer}
       </button>
-    ) : (
+    );
+  }
+
+  createIncorrectButton(answer, index) {
+    const { isDisabled, changeIsDisabled, intervalId, player } = this.props;
+    return (
       <button
         type="button"
         key={answer}
@@ -87,6 +93,13 @@ class AnswerOptions extends Component {
     );
   }
 
+  createButtons(answer, index) {
+    const { questions, questionIndex } = this.props;
+    return answer === questions[questionIndex].correct_answer
+      ? this.createCorrectButton(answer)
+      : this.createIncorrectButton(answer, index);
+  }
+
   render() {
     const { questionIndex, possibleAnswers } = this.props;
     return !possibleAnswers.length ? (
@@ -94,7 +107,7 @@ class AnswerOptions extends Component {
     ) : (
       <div className="order-buttons">
         {possibleAnswers[questionIndex].map((item, index) =>
-          this.createButton(item, index),
+          this.createButtons(item, index),
         )}
         <Timing />
       </div>
