@@ -12,14 +12,11 @@ export const UPDATE_TIMER = 'UPDATE_TIMER';
 export const STOP_TIMER = 'STOP_TIMER';
 export const SAVE_INTERVAL_ID = 'SAVE_INTERVAL_ID';
 export const RESET_TIMER = 'RESET_TIMER';
-
 export const UPDATE_RANKING = 'UPDATE_RANKING';
-
 export const UPDATE_SCORE = 'UPDATE_SCORE';
-
 export const UPDATE_ASSERTIONS = 'UPDATE_ASSERTIONS';
-
 export const RESET_QUESTION_INDEX = 'RESET_QUESTION_INDEX';
+export const RESET_PLAYER = 'RESET_PLAYER';
 
 export const updateRanking = (payload) => ({
   type: UPDATE_RANKING,
@@ -107,4 +104,8 @@ export const updateAssertions = () => ({
 
 export const resetQuestionIndex = () => ({
   type: RESET_QUESTION_INDEX,
+});
+
+export const resetPlayer = () => ({
+  type: RESET_PLAYER,
 });

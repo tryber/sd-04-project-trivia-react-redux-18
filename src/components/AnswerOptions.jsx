@@ -13,17 +13,21 @@ import './AnswerOptions.css';
 class AnswerOptions extends Component {
   static saveLocalStorage(player) {
     localStorage.setItem('state', JSON.stringify({ player }));
+    const test = JSON.parse(localStorage.getItem('state'));
+    console.log(test);
   }
 
   constructor(props) {
     super(props);
 
-    this.createButton = this.createButton.bind(this);
+    this.createButtons = this.createButtons.bind(this);
+    this.createCorrectButton = this.createCorrectButton.bind(this);
+    this.createIncorrectButton = this.createIncorrectButton.bind(this);
     this.calculateScore = this.calculateScore.bind(this);
   }
 
   calculateScore() {
-    const { timer, questions, questionIndex, changeScore, player } = this.props;
+    const { timer, questions, questionIndex, changeScore } = this.props;
 
     const difficulty = questions[questionIndex].difficulty;
 
@@ -38,21 +42,18 @@ class AnswerOptions extends Component {
     if (difficulty === 'easy') {
       changeScore(10 + (timer * 1));
     }
-
-    AnswerOptions.saveLocalStorage(player);
   }
 
-  createButton(answer, index) {
+  createCorrectButton(answer) {
     const {
-      questions,
-      questionIndex,
       isDisabled,
       changeIsDisabled,
       intervalId,
       player,
       changeAssertions,
     } = this.props;
-    return answer === questions[questionIndex].correct_answer ? (
+
+    return (
       <button
         type="button"
         key={answer}
@@ -62,13 +63,19 @@ class AnswerOptions extends Component {
           clearInterval(intervalId);
           this.calculateScore();
           changeAssertions();
+          AnswerOptions.saveLocalStorage(player);
         }}
         disabled={isDisabled}
         className={isDisabled ? 'btn-answer correct-answer' : 'btn-answer'}
       >
         {answer}
       </button>
-    ) : (
+    );
+  }
+
+  createIncorrectButton(answer, index) {
+    const { isDisabled, changeIsDisabled, intervalId, player } = this.props;
+    return (
       <button
         type="button"
         key={answer}
@@ -86,6 +93,13 @@ class AnswerOptions extends Component {
     );
   }
 
+  createButtons(answer, index) {
+    const { questions, questionIndex } = this.props;
+    return answer === questions[questionIndex].correct_answer
+      ? this.createCorrectButton(answer)
+      : this.createIncorrectButton(answer, index);
+  }
+
   render() {
     const { questionIndex, possibleAnswers } = this.props;
     return !possibleAnswers.length ? (
@@ -93,7 +107,7 @@ class AnswerOptions extends Component {
     ) : (
       <div className="order-buttons">
         {possibleAnswers[questionIndex].map((item, index) =>
-          this.createButton(item, index),
+          this.createButtons(item, index),
         )}
         <Timing />
       </div>

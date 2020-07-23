@@ -6,7 +6,7 @@ import './SessionHeader.css';
 
 class SessionHeader extends Component {
   render() {
-    const { email, name, score } = this.props;
+    const { email, name, score, dataTestId } = this.props;
     return (
       <header className="session-header">
         <div className="player-info">
@@ -20,7 +20,7 @@ class SessionHeader extends Component {
             {name}
           </h3>
         </div>
-        <h3 data-testid="header-score">{!score ? 0 : score}</h3>
+        <h3 data-testid={dataTestId}>{!score ? 0 : score}</h3>
       </header>
     );
   }
@@ -35,6 +35,7 @@ SessionHeader.propTypes = {
   score: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,
+  dataTestId: PropTypes.string.isRequired,
 };
 
 export default connect(mapStateToProps)(SessionHeader);
