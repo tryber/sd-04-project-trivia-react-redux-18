@@ -20,7 +20,7 @@ class SessionHeader extends Component {
             {name}
           </h3>
         </div>
-        <h3 data-testid="header-score">{!score ? 0 : score}</h3>
+        <h3 data-testid="header-score">{score}</h3>
       </header>
     );
   }
