@@ -71,7 +71,7 @@ class Game extends Component {
     }
     return (
       <div className="game-page-container">
-        <SessionHeader dataTestId="header-score" />
+        <SessionHeader />
         <div className="page-container">
           <div className="left-container">
             <Questions />
