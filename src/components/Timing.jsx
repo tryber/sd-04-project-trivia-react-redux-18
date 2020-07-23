@@ -45,6 +45,7 @@ Timing.propTypes = {
   timer: PropTypes.number.isRequired,
   changeIntervalId: PropTypes.func.isRequired,
   intervalId: PropTypes.number.isRequired,
+  changeIsDisabled: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Timing);
