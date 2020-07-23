@@ -17,11 +17,6 @@ class AnswerOptions extends Component {
   //   console.log(test);
   // }
 
-  componentDidUpdate() {
-    const { player } = this.props;
-    localStorage.setItem('state', JSON.stringify({ player }));
-  }
-
   constructor(props) {
     super(props);
 
@@ -29,6 +24,11 @@ class AnswerOptions extends Component {
     this.createCorrectButton = this.createCorrectButton.bind(this);
     this.createIncorrectButton = this.createIncorrectButton.bind(this);
     this.calculateScore = this.calculateScore.bind(this);
+  }
+
+  componentDidUpdate() {
+    const { player } = this.props;
+    localStorage.setItem('state', JSON.stringify({ player }));
   }
 
   calculateScore() {
@@ -54,7 +54,6 @@ class AnswerOptions extends Component {
       isDisabled,
       changeIsDisabled,
       intervalId,
-      player,
       changeAssertions,
     } = this.props;
 
