@@ -78,7 +78,7 @@ class AnswerOptions extends Component {
   }
 
   createIncorrectButton(answer, index) {
-    const { isDisabled, changeIsDisabled, intervalId, player } = this.props;
+    const { isDisabled, changeIsDisabled, intervalId } = this.props;
     return (
       <button
         type="button"
