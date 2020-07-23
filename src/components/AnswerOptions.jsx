@@ -12,7 +12,7 @@ import './AnswerOptions.css';
 
 class AnswerOptions extends Component {
   static saveLocalStorage(player) {
-    localStorage.setItem('player', JSON.stringify(player));
+    localStorage.setItem('state', JSON.stringify({ player }));
   }
 
   constructor(props) {
@@ -108,11 +108,7 @@ const mapStateToProps = (state) => ({
   isDisabled: state.answers.isDisabled,
   timer: state.time.time,
   intervalId: state.time.intervalId,
-  score: state.userInfo.player.score,
   player: state.userInfo.player,
-  name: state.userInfo.player.name,
-  email: state.userInfo.player.gravatarEmail,
-  assertions: state.userInfo.player.assertions,
 });
 
 const mapDispatchToProps = (dispatch) => ({

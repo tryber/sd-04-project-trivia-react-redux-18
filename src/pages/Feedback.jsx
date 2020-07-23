@@ -7,8 +7,8 @@ import SessionHeader from '../components/SessionHeader';
 
 import { resetQuestionIndex } from '../redux/actions';
 
-const feedbackMessage = (score) => {
-  const result = (score >= 3) ? 'Mandou bem!' : 'Podia ser melhor...';
+const feedbackMessage = (assertions) => {
+  const result = assertions >= 3 ? 'Mandou bem!' : 'Podia ser melhor...';
   return result;
 };
 
@@ -30,7 +30,7 @@ class Feedback extends Component {
       <div>
         <h1>Feedback</h1>
         <SessionHeader />
-        <h3 data-testid="feedback-text">{feedbackMessage(score)}</h3>
+        <h3 data-testid="feedback-text">{feedbackMessage(assertions)}</h3>
         {feedbackResults(score, assertions)}
         <Link to="/">
           <button

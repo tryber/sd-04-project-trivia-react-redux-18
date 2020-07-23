@@ -26,7 +26,7 @@ class Ranking extends Component {
   }
 }
 
-// localStorage.setItem('ranking', JSON.stringify([{name, score, picture: }]))
+// localStorage.setItem('ranking', JSON.stringify([{name, score, picture}]))
 
 const mapStateToProps = (state) => ({
   rank: state.ranking.ranking,

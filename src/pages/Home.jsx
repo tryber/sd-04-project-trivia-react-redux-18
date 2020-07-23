@@ -16,6 +16,8 @@ class Home extends Component {
       token: '',
       redirectPlay: false,
       redirectConfig: false,
+      score: '',
+      picture: '',
     };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.renderInputs = this.renderInputs.bind(this);
@@ -33,12 +35,17 @@ class Home extends Component {
 
   handlePlay() {
     const { saveInfo, setToken } = this.props;
-    const { email, username } = this.state;
+    const { email, username, score, picture } = this.state;
     getToken().then((json) => {
       setToken(json.token);
       localStorage.setItem('token', json.token);
       this.setState({ redirectPlay: true, token: json.token });
     });
+
+    localStorage.setItem(
+      'ranking',
+      JSON.stringify([{ name: username, score, picture }]),
+    );
 
     saveInfo({ player: { name: username, gravatarEmail: email } });
   }
