@@ -36,6 +36,16 @@ const userInfo = (state = INITIAL_STATE, action) => {
         ...state,
         player: { ...state.player, assertions: state.player.assertions + 1 },
       };
+    case actions.RESET_PLAYER:
+      return {
+        ...state,
+        player: {
+          name: '',
+          assertions: 0,
+          score: 0,
+          gravatarEmail: '',
+        }
+      }
     default:
       return state;
   }

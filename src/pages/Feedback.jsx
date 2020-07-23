@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 
 import SessionHeader from '../components/SessionHeader';
 
-import { resetQuestionIndex } from '../redux/actions';
+import { resetQuestionIndex, resetPlayer } from '../redux/actions';
 
 const feedbackMessage = (assertions) => {
   const result = assertions >= 3 ? 'Mandou bem!' : 'Podia ser melhor...';
@@ -25,7 +25,7 @@ const feedbackResults = (score, assertions) => (
 
 class Feedback extends Component {
   render() {
-    const { assertions, score, resetIndex } = this.props;
+    const { assertions, score, resetIndex, resetPlayerInfo } = this.props;
     return (
       <div>
         <h1>Feedback</h1>
@@ -36,7 +36,10 @@ class Feedback extends Component {
           <button
             type="button"
             data-testid="btn-play-again"
-            onClick={() => resetIndex()}
+            onClick={() => {
+              resetIndex()
+              resetPlayerInfo()
+            }}
           >
             JOGAR NOVAMENTE
           </button>
@@ -45,7 +48,10 @@ class Feedback extends Component {
           <button
             type="button"
             data-testid="btn-ranking"
-            onClick={() => resetIndex()}
+            onClick={() => {
+              resetIndex()
+              resetPlayerInfo()
+            }}
           >
             VER RANKING
           </button>
@@ -62,6 +68,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   resetIndex: () => dispatch(resetQuestionIndex()),
+  resetPlayerInfo: () => dispatch(resetPlayer()),
 });
 
 Feedback.propTypes = {

@@ -26,8 +26,9 @@ class Game extends Component {
   }
 
   componentDidMount() {
-    const { getQuestions } = this.props;
+    const { getQuestions, player } = this.props;
     getQuestions();
+    localStorage.setItem('state', JSON.stringify({ player }))
   }
 
   componentWillUnmount() {
@@ -92,6 +93,7 @@ const mapStateToProps = (state) => ({
   name: state.userInfo.player.name,
   score: state.userInfo.player.score,
   email: state.userInfo.player.gravatarEmail,
+  player: state.userInfo.player,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -115,7 +117,7 @@ Game.propTypes = {
   newTimer: PropTypes.func.isRequired,
   changeRanking: PropTypes.func.isRequired,
   name: PropTypes.string.isRequired,
-  score: PropTypes.string.isRequired,
+  score: PropTypes.number.isRequired,
   email: PropTypes.string.isRequired,
   intervalId: PropTypes.number.isRequired,
 };

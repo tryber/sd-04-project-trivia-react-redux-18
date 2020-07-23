@@ -13,6 +13,8 @@ import './AnswerOptions.css';
 class AnswerOptions extends Component {
   static saveLocalStorage(player) {
     localStorage.setItem('state', JSON.stringify({ player }));
+    const test = JSON.parse(localStorage.getItem('state'));
+    console.log(test);
   }
 
   constructor(props) {
@@ -23,7 +25,7 @@ class AnswerOptions extends Component {
   }
 
   calculateScore() {
-    const { timer, questions, questionIndex, changeScore, player } = this.props;
+    const { timer, questions, questionIndex, changeScore } = this.props;
 
     const difficulty = questions[questionIndex].difficulty;
 
@@ -38,8 +40,6 @@ class AnswerOptions extends Component {
     if (difficulty === 'easy') {
       changeScore(10 + (timer * 1));
     }
-
-    AnswerOptions.saveLocalStorage(player);
   }
 
   createButton(answer, index) {
@@ -62,6 +62,7 @@ class AnswerOptions extends Component {
           clearInterval(intervalId);
           this.calculateScore();
           changeAssertions();
+          AnswerOptions.saveLocalStorage(player);
         }}
         disabled={isDisabled}
         className={isDisabled ? 'btn-answer correct-answer' : 'btn-answer'}
