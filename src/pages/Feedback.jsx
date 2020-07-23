@@ -67,7 +67,7 @@ class Feedback extends Component {
     return (
       <div>
         <h1>Feedback</h1>
-        <SessionHeader />
+        <SessionHeader dataTestId="feedback-text" />
         <h3 data-testid="feedback-text">{feedbackMessage(assertions)}</h3>
         {feedbackResults(score, assertions)}
         <Link to="/">{this.createPlayAgainButton()}</Link>
