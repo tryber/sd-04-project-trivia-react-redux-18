@@ -34,13 +34,13 @@ class AnswerOptions extends Component {
     console.log(questions[questionIndex].difficulty);
 
     if (difficulty === 'hard') {
-      changeScore(10 + timer * 3);
+      changeScore(10 + (timer * 3));
     }
     if (difficulty === 'medium') {
-      changeScore(10 + timer * 2);
+      changeScore(10 + (timer * 2));
     }
     if (difficulty === 'easy') {
-      changeScore(10 + timer * 1);
+      changeScore(10 + (timer * 1));
     }
   }
 

@@ -27,7 +27,7 @@ const updateScore = (state, action) => ({
   },
 });
 
-const resetPlayer = (state, action) => ({
+const resetPlayer = (state) => ({
   ...state,
   player: {
     name: '',

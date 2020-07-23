@@ -120,12 +120,12 @@ Game.propTypes = {
   score: PropTypes.number.isRequired,
   email: PropTypes.string.isRequired,
   intervalId: PropTypes.number.isRequired,
-  player: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    assertions: PropTypes.number.isRequired,
-    score: PropTypes.number.isRequired,
-    gravatarEmail: PropTypes.string.isRequired,
-  }),
+  // player: PropTypes.shape({
+  //   name: PropTypes.string.isRequired,
+  //   assertions: PropTypes.number.isRequired,
+  //   score: PropTypes.number.isRequired,
+  //   gravatarEmail: PropTypes.string.isRequired,
+  // }),
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Game);
