@@ -35,6 +35,7 @@ SessionHeader.propTypes = {
   score: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,
+  dataTestId: PropTypes.string.isRequired,
 };
 
 export default connect(mapStateToProps)(SessionHeader);
