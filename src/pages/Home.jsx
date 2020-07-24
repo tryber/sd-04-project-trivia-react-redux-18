@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import { saveUserInfo } from '../redux/actions/index';
+import { saveUserInfo, saveToken } from '../redux/actions/index';
 
 import { getToken } from '../services/api';
 
@@ -16,6 +16,8 @@ class Home extends Component {
       token: '',
       redirectPlay: false,
       redirectConfig: false,
+      score: '',
+      picture: '',
     };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.renderInputs = this.renderInputs.bind(this);
@@ -32,12 +34,25 @@ class Home extends Component {
   }
 
   handlePlay() {
-    const { saveInfo } = this.props;
-    const { email, username } = this.state;
+    const { saveInfo, setToken } = this.props;
+    const { email, username, score, picture } = this.state;
     getToken().then((json) => {
+      setToken(json.token);
       localStorage.setItem('token', json.token);
       this.setState({ redirectPlay: true, token: json.token });
     });
+
+    localStorage.setItem(
+      'ranking',
+      JSON.stringify([{ name: username, score, picture }]),
+    );
+
+    localStorage.setItem(
+      'state',
+      JSON.stringify({
+        player: { name: '', assertions: '', score: '', gravatarEmail: '' },
+      }),
+    );
 
     saveInfo({ player: { name: username, gravatarEmail: email } });
   }
@@ -118,10 +133,12 @@ class Home extends Component {
 
 const mapDispatchToProps = (dispatch) => ({
   saveInfo: (payload) => dispatch(saveUserInfo(payload)),
+  setToken: (payload) => dispatch(saveToken(payload)),
 });
 
 Home.propTypes = {
   saveInfo: PropTypes.func.isRequired,
+  setToken: PropTypes.func.isRequired,
 };
 
 export default connect(null, mapDispatchToProps)(Home);
