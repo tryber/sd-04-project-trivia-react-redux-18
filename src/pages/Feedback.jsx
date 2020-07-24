@@ -12,16 +12,16 @@ const feedbackMessage = (assertions) => {
   return result;
 };
 
-const feedbackResults = (score, assertions) => (
-  <div>
-    <h3>Assertions</h3>
-    <p data-testid="feedback-total-question">
-      You got {assertions} assertions!
-    </p>
-    <h3>Your Score</h3>
-    <p data-testid="feedback-total-score">Your score is {score}</p>
-  </div>
-);
+// const feedbackResults = (score, assertions) => (
+//   <div>
+//     <h3>Assertions</h3>
+//     <p data-testid="feedback-total-question">
+//       You got {assertions} assertions!
+//     </p>
+//     <h3>Your Score</h3>
+//     <p data-testid="feedback-total-score">Your score is {score}</p>
+//   </div>
+// );
 
 class Feedback extends Component {
   constructor(props) {
@@ -69,7 +69,13 @@ class Feedback extends Component {
         <h1>Feedback</h1>
         <SessionHeader />
         <h3 data-testid="feedback-text">{feedbackMessage(assertions)}</h3>
-        {feedbackResults(score, assertions)}
+        {/* {feedbackResults(score, assertions)} */}
+        <div>
+          <h3>Assertions</h3>
+          <p data-testid="feedback-total-question">{assertions}</p>
+          <h3>Your Score</h3>
+          <p data-testid="feedback-total-score">{score}</p>
+        </div>
         <Link to="/">{this.createPlayAgainButton()}</Link>
         <Link to="/ranking">{this.createSeeRankingButton()}</Link>
       </div>
