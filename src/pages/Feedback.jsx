@@ -71,13 +71,13 @@ class Feedback extends Component {
     return (
       <div className="feedback-container">
         <SessionHeader />
-        <h1>Feedback</h1>        
+        <h1 className="title">Feedback</h1>        
         <h3 data-testid="feedback-text">{feedbackMessage(assertions)}</h3>
         {/* {feedbackResults(score, assertions)} */}
         <div>
-          <h3>Assertions</h3>
+          <h3 className="calls">Assertions</h3>
           <p data-testid="feedback-total-question" className="show-number">{assertions}</p>
-          <h3>Your Score</h3>
+          <h3 className="calls">Your Score</h3>
           <p data-testid="feedback-total-score" className="show-number">{score}</p>
         </div>
         <Link to="/">{this.createPlayAgainButton()}</Link>
