@@ -7,6 +7,10 @@ import { saveUserInfo, saveToken } from '../redux/actions/index';
 
 import { getToken } from '../services/api';
 
+import './Home.css';
+import '../App.css';
+import trivia from '../trivia.png';
+
 class Home extends Component {
   constructor(props) {
     super(props);
@@ -65,7 +69,7 @@ class Home extends Component {
 
   renderInputs() {
     return (
-      <div>
+      <div className="inputs">
         <label htmlFor="email">
           Email do Gravatar:
           <input
@@ -92,6 +96,7 @@ class Home extends Component {
     const { email, username } = this.state;
     return (
       <button
+        className="btn"
         data-testid="btn-play"
         type="button"
         onClick={this.handlePlay}
@@ -106,11 +111,12 @@ class Home extends Component {
     return (
       <div>
         <button
+          className="btn"
           data-testid="btn-settings"
           type="button"
           onClick={this.handleConfig}
         >
-          Configurações
+          CONFIGURAÇÕES
         </button>
       </div>
     );
@@ -122,10 +128,13 @@ class Home extends Component {
     if (redirectPlay) return <Redirect to="/game" />;
     if (redirectConfig) return <Redirect to="/settings" />;
     return (
-      <div>
-        {this.renderInputs()}
-        {this.renderBtnPlay()}
-        {this.renderBtnConfig()}
+      <div className="box">
+        <img src={trivia} className="App-logo" alt="trivia-logo" height={200} />
+        <div className="login">
+          {this.renderInputs()}
+          {this.renderBtnPlay()}
+          {this.renderBtnConfig()}
+        </div>
       </div>
     );
   }

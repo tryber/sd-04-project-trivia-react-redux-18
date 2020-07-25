@@ -1,4 +1,23 @@
-.btn-answer {
+.feedback-container {
+  background: #3b6978;
+  border-radius: 15px;
+  border: 2px solid #e4e3e3;  
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  text-align: center;
+  width: 900px;
+}
+
+.feedback-container h1 {
+  font-size: 40px;
+}
+
+.feedback-container h3 {
+  font-size: 25px;
+}
+
+.btn {
   box-shadow: inset 0px 1px 0px 0px #ffffff;
   background: linear-gradient(to bottom, #ededed 5%, #dfdfdf 100%);
   background-color: #ededed;
@@ -14,27 +33,19 @@
   padding: 6px 24px;
   text-decoration: none;
   text-shadow: 0px 1px 0px #ffffff;
-  width: 390px;
+  width: 270px;
 }
-
-.btn-answer :hover {
+.btn:hover {
   background: linear-gradient(to bottom, #dfdfdf 5%, #ededed 100%);
   background-color: #dfdfdf;
 }
-.btn-answer :active {
+.btn:active {
   position: relative;
   top: 1px;
 }
 
-.correct-answer {
-  border: 3px solid rgb(6, 240, 15);
-}
-
-.incorrect-answer {
-  border: 3px solid red;
-}
-
-.order-buttons {
-  display: flex;
-  flex-direction: column;
+.show-number {
+  background-color: #204051;
+  padding: 4px;
+  border-radius: 0;
 }

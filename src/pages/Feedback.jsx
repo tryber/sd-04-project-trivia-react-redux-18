@@ -7,6 +7,8 @@ import SessionHeader from '../components/SessionHeader';
 
 import { resetQuestionIndex, resetPlayer } from '../redux/actions';
 
+import './Feedback.css';
+
 const feedbackMessage = (assertions) => {
   const result = assertions >= 3 ? 'Mandou bem!' : 'Podia ser melhor...';
   return result;
@@ -35,6 +37,7 @@ class Feedback extends Component {
     return (
       <button
         type="button"
+        className="btn"
         data-testid="btn-play-again"
         onClick={() => {
           resetIndex();
@@ -51,6 +54,7 @@ class Feedback extends Component {
     return (
       <button
         type="button"
+        className="btn"
         data-testid="btn-ranking"
         onClick={() => {
           resetIndex();
@@ -65,16 +69,16 @@ class Feedback extends Component {
   render() {
     const { assertions, score } = this.props;
     return (
-      <div>
-        <h1>Feedback</h1>
+      <div className="feedback-container">
         <SessionHeader />
+        <h1>Feedback</h1>        
         <h3 data-testid="feedback-text">{feedbackMessage(assertions)}</h3>
         {/* {feedbackResults(score, assertions)} */}
         <div>
           <h3>Assertions</h3>
-          <p data-testid="feedback-total-question">{assertions}</p>
+          <p data-testid="feedback-total-question" className="show-number">{assertions}</p>
           <h3>Your Score</h3>
-          <p data-testid="feedback-total-score">{score}</p>
+          <p data-testid="feedback-total-score" className="show-number">{score}</p>
         </div>
         <Link to="/">{this.createPlayAgainButton()}</Link>
         <Link to="/ranking">{this.createSeeRankingButton()}</Link>

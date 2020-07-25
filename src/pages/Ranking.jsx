@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
+import './Ranking.css';
+
 class Ranking extends Component {
   render() {
     const { rank } = this.props;
@@ -19,20 +21,20 @@ class Ranking extends Component {
     };
 
     return (
-      <div>
-        <h1 data-testid="ranking-title">Ranking</h1>
+      <div className="ranking-container">
+        <h1 data-testid="ranking-title">Ranking</h1>        
+        {rank.sort(compare).map(({ name, score, picture }, index) => (
+          <div className="rank-position">
+            <img src={picture} alt={`${name} gravatar`} />
+            <p data-testid={`player-name-${index}`}>{name}</p>
+            <p data-testid={`player-score-${index}`} className="points">{score}</p>
+          </div>
+        ))}
         <Link to="/">
-          <button data-testid="btn-go-home" type="button">
+          <button data-testid="btn-go-home" type="button" className="btn">
             Voltar ao Início
           </button>
         </Link>
-        {rank.sort(compare).map(({ name, score, picture }, index) => (
-          <div>
-            <img src={picture} alt={`${name} gravatar`} />
-            <p data-testid={`player-name-${index}`}>{name}</p>
-            <p data-testid={`player-score-${index}`}>{score}</p>
-          </div>
-        ))}
       </div>
     );
   }
