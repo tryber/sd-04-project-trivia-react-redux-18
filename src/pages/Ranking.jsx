@@ -22,12 +22,14 @@ class Ranking extends Component {
 
     return (
       <div className="ranking-container">
-        <h1 data-testid="ranking-title">Ranking</h1>        
+        <h1 data-testid="ranking-title">Ranking</h1>
         {rank.sort(compare).map(({ name, score, picture }, index) => (
           <div className="rank-position">
             <img src={picture} alt={`${name} gravatar`} />
             <p data-testid={`player-name-${index}`}>{name}</p>
-            <p data-testid={`player-score-${index}`} className="points">{score}</p>
+            <p data-testid={`player-score-${index}`} className="points">
+              {score}
+            </p>
           </div>
         ))}
         <Link to="/">

@@ -1,8 +1,8 @@
 .btn-answer {
-  background-color: #ededed;
   background: linear-gradient(to bottom, #ededed 5%, #dfdfdf 100%);
-  border-radius: 6px;
+  background-color: #ededed;
   border: 1px solid #dcdcdc;
+  border-radius: 6px;
   box-shadow: inset 0 1px 0 0 #ffffff;
   color: #777777;
   cursor: pointer;
@@ -18,8 +18,8 @@
 }
 
 .btn-answer :hover {
-  background-color: #dfdfdf;
   background: linear-gradient(to bottom, #dfdfdf 5%, #ededed 100%);
+  background-color: #dfdfdf;
 }
 .btn-answer :active {
   position: relative;
