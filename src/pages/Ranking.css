@@ -43,7 +43,7 @@
   background: #204051;
   display: flex;
   justify-content: space-between;
-  margin: 0px 0px 15px 0px;
+  margin: 0 0 15px;
   padding: 10px;
   width: 400px;
 }
