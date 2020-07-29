@@ -11,12 +11,6 @@ import Timing from '../components/Timing';
 import './AnswerOptions.css';
 
 class AnswerOptions extends Component {
-  // static saveLocalStorage(player) {
-  //   localStorage.setItem('state', JSON.stringify({ player }));
-  //   const test = JSON.parse(localStorage.getItem('state'));
-  //   console.log(test);
-  // }
-
   constructor(props) {
     super(props);
 
@@ -39,13 +33,13 @@ class AnswerOptions extends Component {
     console.log(questions[questionIndex].difficulty);
 
     if (difficulty === 'hard') {
-      changeScore(10 + timer * 3);
+      changeScore(10 + (timer * 3));
     }
     if (difficulty === 'medium') {
-      changeScore(10 + timer * 2);
+      changeScore(10 + (timer * 2));
     }
     if (difficulty === 'easy') {
-      changeScore(10 + timer * 1);
+      changeScore(10 + (timer * 1));
     }
   }
 
@@ -67,7 +61,6 @@ class AnswerOptions extends Component {
           clearInterval(intervalId);
           this.calculateScore();
           changeAssertions();
-          // AnswerOptions.saveLocalStorage(player);
         }}
         disabled={isDisabled}
         className={isDisabled ? 'btn-answer correct-answer' : 'btn-answer'}
@@ -87,7 +80,6 @@ class AnswerOptions extends Component {
         onClick={() => {
           changeIsDisabled();
           clearInterval(intervalId);
-          // AnswerOptions.saveLocalStorage(player);
         }}
         disabled={isDisabled}
         className={isDisabled ? 'btn-answer incorrect-answer' : 'btn-answer'}
